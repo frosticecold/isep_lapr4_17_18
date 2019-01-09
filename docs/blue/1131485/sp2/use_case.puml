@@ -1,0 +1,14 @@
+@startuml  use_case.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+User -> (US1 Create and Save a Chart )
+
+User -> (US2 Edit a Chart and examine it)
+
+User -> (US3 Delete a Chart)
+
+@enduml

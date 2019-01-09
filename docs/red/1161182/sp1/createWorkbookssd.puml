@@ -1,0 +1,17 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+actor User
+
+User -> Browser : clicks create new workbook button
+
+Browser ->> User : prompts for title and description for the workbook
+
+User -> Browser: inserts the title and description
+
+Browser ->> Server : adds new workbook description with blank workbook.
+
+Browser -->> User : shows the workbook created
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> HomeView: Import workbook from xml
+HomeView --> User: Request name, description and path to file
+User -> HomeView: Provides information
+HomeView -> Controller: Processes file. Extracts and creates workbook
+database Database
+Controller -> Database: Saves created workbook
+Controller -> HomeView: Display newly created workbook
+HomeView --> User: Shows the newly created workbook
+
+@enduml

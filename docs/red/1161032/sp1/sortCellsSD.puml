@@ -1,0 +1,49 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+actor User
+participant WorkbookView
+participant WorkbookPresenter
+participant sortCellsController
+participant WorkbooksService
+participant WorkbooksServiceImpl
+
+box "NSheets Client"
+participant WorkbookView
+participant WorkbookPresenter
+participant WorkbooksService
+end box
+
+box "Server"
+participant WorkbooksServiceImpl
+participant sortCellsController
+end box
+
+box "Shared"
+participant Spreadsheet
+participant Cell
+end box
+
+
+User -> WorkbookView : click ascending/descending button
+WorkbookView -> WorkbookPresenter : onClick()
+WorkbookPresenter ->> WorkbooksService : sortCompleto()
+WorkbooksService ->> WorkbooksServiceImpl : sortCompleto()
+WorkbooksServiceImpl -> sortCellsController : sortCompleto()
+sortCellsController -> Spreadsheet : getColumn()
+sortCellsController -> sortCellsController : typeOfColumn()
+sortCellsController -> sortCellsController : isNumber()
+sortCellsController -> sortCellsController : isDate()
+sortCellsController -> sortCellsController : ascendingSort()/descendingSort()
+sortCellsController -> sortCellsController : addSortedColumn()
+Spreadsheet -> Cell : getCell()
+Cell -> Cell :setContent()
+
+
+
+
+
+
+
+@enduml

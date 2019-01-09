@@ -1,0 +1,26 @@
+@startuml design.png
+  participant "USER" as USER
+  participant "UI: MainUI" as UI
+  participant "uic : MainUI_Controller" as UIC
+  participant ExtensionManager as ExtM
+  participant "extension : AbstractExtension" as EExample
+  participant "uiExtension : UIExtension" as UIExt
+  USER->UI: opens worksheet
+  UI-> UIC: loads worksheet...
+  USER->UI: defines settings...
+  UI->UIC: defineSettings()
+  UIC->ExtM: addExtensions()
+  UIC -> ExtM : extensions=getExtensions();
+  loop for Extension ext : extensions
+  	UIC -> EExample : uiExtension=getUIExtension(this);
+  	activate EExample
+  	create UIExt
+  	EExample -> UIExt : new(extension, uic)
+  	deactivate EExample
+  	UIExt -> UIExt : getSideBar();
+  	activate UIExt
+  	deactivate UIExt
+  	UIC -> UIC : uiExtensions.add(uiExtension);
+  end
+  UIC --> UI : shows extension
+ @enduml

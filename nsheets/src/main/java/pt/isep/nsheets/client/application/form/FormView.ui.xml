@@ -1,0 +1,95 @@
+<!-- 
+/**
+ * @author Rui Ribeiro <1150344@isep.ipp.pt>
+ */
+ -->
+
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:m="urn:import:gwt.material.design.client.ui"
+	xmlns:ma="urn:import:gwt.material.design.addins.client">
+
+	<ui:import
+		field="pt.isep.nsheets.client.place.NameTokens.workbook" />
+	<ui:with field="res"
+		type="pt.isep.nsheets.client.resources.AppResources" />
+
+	<ui:style>
+	.content {
+		max-width: 600px;
+		margin: auto;
+	}
+	
+	.table-style {
+		background: #e0e0e0;
+		border-collapse: collapse;
+	}
+	
+	.table-style td {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		height: 36px;
+		border: 2px solid #1976d2;
+	}
+	
+	.table-style tr {
+		color: #3f3f3f;
+		background: #e0e0e0;
+		border: 2px solid #1976d2;
+	}
+	</ui:style>
+
+	<g:HTMLPanel styleName="{style.content}">
+		<m:MaterialRow>
+			<g:HTMLPanel ui:field="window">
+				<m:MaterialColumn padding="12">
+					<g:VerticalPanel>
+						<g:FlexTable ui:field="formTable" borderWidth="2"
+							styleName="{style.table-style}" />
+					</g:VerticalPanel>
+				</m:MaterialColumn>
+				<m:MaterialColumn grid="s12" padding="12">
+					<g:VerticalPanel>
+						<m:MaterialRow>
+							<m:MaterialButton text="Add Row"
+								ui:field="addRowButton" waves="DEFAULT" />
+							<m:MaterialButton text="Remove Row"
+								ui:field="removeRowButton" waves="DEFAULT" />
+						</m:MaterialRow>
+						<m:MaterialDivider />
+						<m:MaterialRow>
+							<m:MaterialTextBox m:id="ltBox"
+								ui:field="labelTextBox" placeholder="Static Text"
+								label="Enter the text to be shown in the Static Text Box"
+								active="true" />
+							<m:MaterialButton text="Add Static Text Box"
+								ui:field="addLabelButton" waves="DEFAULT" />
+						</m:MaterialRow>
+						<m:MaterialRow>
+							<m:MaterialTextBox m:id="tbBox"
+								ui:field="textAreaBox" placeholder="Placeholder"
+								label="Enter the text to be shown as placeholder in the Edit Box"
+								active="true" />
+							<m:MaterialButton text="Add Edit Box"
+								ui:field="addTextAreaButton" waves="DEFAULT" />
+						</m:MaterialRow>
+						<m:MaterialRow>
+							<m:MaterialTextBox m:id="buttonBox"
+								ui:field="buttonBox" placeholder="Button Text"
+								label="Button Text" active="false" />
+							<m:MaterialButton text="Add Button"
+								ui:field="addButtonButton" waves="DEFAULT" />
+						</m:MaterialRow>
+					</g:VerticalPanel>
+				</m:MaterialColumn>
+			</g:HTMLPanel>
+
+		</m:MaterialRow>
+		<m:MaterialRow marginTop="60">
+			<g:Hyperlink text="Back to Workbook"
+				targetHistoryToken="{workbook}" />
+		</m:MaterialRow>
+	</g:HTMLPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,50 @@
+@startuml  design2.png
+skinparam handwritten false
+skinparam monochrome false
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor SuperUser
+boundary ProfileView
+control ProfilePresenter
+control ProfileService
+control ProfileController
+entity UserRepository
+database Database 
+
+box "NSheets Client"
+participant ProfileView
+participant ProfilePresenter
+end box
+ 
+box "Server"
+participant ProfileService
+participant ProfileController
+participant UserRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+SuperUser -> ProfileView : onReveal() / navigate to page 
+ProfileView -> ProfilePresenter : loadUsers()
+ProfilePresenter ->> ProfileService : loadUsers()
+ProfileService -> ProfileController : loadUsers
+ProfileController -> UserRepository : findAll()
+UserRepository -> Database : fetch
+ProfileService ->> ProfilePresenter : onSuccess() 
+ProfilePresenter -> ProfileView : setContents()
+
+SuperUser -> ProfileView : enable/disable user
+ProfileView -> ProfilePresenter : onStatusChange()
+ProfilePresenter -> ProfileService : changeStatus(user, status)
+ProfileService -> ProfileController : changeStatus(user, status)
+ProfileController -> UserRepository : save(user)
+UserRepository -> Database : save
+ProfileService ->> ProfilePresenter : onSucess()
+ProfilePresenter -> ProfileView : changeUserStatus()
+
+
+@enduml

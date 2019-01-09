@@ -1,0 +1,9 @@
+@startuml
+class AgendaService [[java:pt.isep.nsheets.server.lapr4.blue.s2.core.n1151186.agenda.application.AgendaService]] {
+	+Agenda createAgenda(AgendaDTO dto)
+	+Iterable<Agenda> listAllAgendas()
+	+Boolean removeAgenda(String title, String description)
+	+Agenda editAgenda(AgendaDTO agendaDTO, String title, String description)
+	+Agenda addCalendar(AgendaDTO agendaDTO, EventCalendarDTO ec)
+}
+@enduml

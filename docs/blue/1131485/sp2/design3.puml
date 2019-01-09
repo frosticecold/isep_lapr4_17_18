@@ -1,0 +1,62 @@
+@startuml  design3.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary ChartWizzardView
+
+database Database
+
+box "NSheets Client"
+participant ChartWizzardView
+participant ChartWizzardPresenter 
+
+end box
+
+box "Server"
+
+participant createChartController
+participant deleteChartController
+participant listChartsController
+
+end box
+
+box "Database"
+
+participant Database
+
+end box
+
+
+User -> ChartWizzardPresenter : onClick()
+
+ChartWizzardPresenter -> ChartWizzardView : opensView()
+
+ChartWizzardPresenter -> listChartsController : List<Chart> = loadCharts()
+
+ChartWizzardPresenter -> ChartWizzardView : presentsCharts(List<Chart>)
+
+User -> ChartWizzardView : chooses chart
+
+ChartWizzardView -> ChartWizzardPresenter : displayChart(index)
+
+ChartWizzardPresenter -> createChartController : displayChart(Chart)
+
+ChartWizzardPresenter -> ChartWizzardView : displayChartsContent()
+
+User -> ChartWizzardView : wants to delete
+
+ChartWizzardView -> ChartWizzardPresenter : deleteChart(index)
+
+ChartWizzardPresenter -> deleteChartController : deleteChart(Chart)
+
+deleteChartController -> Database : deleteChart(Chart)
+
+ChartWizzardPresenter -> ChartWizzardView : msg = makeFeedback()
+
+ChartWizzardView -> User : showsFeedback(msg)
+
+@enduml

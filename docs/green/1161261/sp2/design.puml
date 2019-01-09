@@ -1,0 +1,29 @@
+@startuml  design.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+participant WorkbookView
+participant ConditionalFormatView
+participant BinaryOperator
+participant Cell
+participant Extension
+
+User -> WorkbookView : start use case
+WorkbookView ->> ConditionalFormatView : create()
+ConditionalFormatView -> BinaryOperator : list = getBinaryOperators()
+WorkbookView ->> User : asks to choose a operator
+User -> WorkbookView : select one
+User -> WorkbookView : insert value
+User -> WorkbookView : color if true or false
+User -> WorkbookView : confirms
+WorkbookView -> Cell : activecell = getActiveCell()
+WorkbookView ->> BinaryOperator : checkCondition(value,content)
+WorkbookView -> Cell : setBackgroundColor()
+WorkbookView -> Extension : refreshConditionInfo()
+
+
+@enduml

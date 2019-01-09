@@ -1,0 +1,30 @@
+@startuml  analysis2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : open ChartWizzard page
+
+Server -> Browser : load Charts
+
+User -> Browser : chooses chart
+
+Browser -> User : shows Chart
+
+User -> Browser : writes the needed information to edit the chart
+
+Browser -> User : shows Chart after updating it
+
+User -> Browser : click to save Chart
+
+Browser -> Server : save Chart
+
+database Database
+
+Server -> Database : save Chart
+
+@enduml

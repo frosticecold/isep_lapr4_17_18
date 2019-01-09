@@ -1,0 +1,17 @@
+/**
+ * @startuml
+ * User -> EventCalendarView : createagenda()
+ * EventCalendarView -> windowCreateAgendas : open()
+ * EventCalendarView -> User : windowCreateAgendas
+ * User -> windowCreateAgendas : insert information
+ * User -> windowCreateAgendars : createag
+ * windowCreateAgendas -> AgendasService : createAgenda(DTO)
+ * AgendasService -> CreateAgendaController : createAgenda(DTO)
+ * CreateAgendaController -> AgendaService : createAgenda(DTO)
+ * AgendaService -> Agenda : a= new(DTO)
+ * AgendaService ->	AgendaRepository : save(eac)
+ * AgendaRepository -> Database : write
+ * AgendaRepository -> Agenda : aDTO.toDTO()
+ *
+ * @enduml
+ */

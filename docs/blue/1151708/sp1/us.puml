@@ -1,0 +1,22 @@
+@startuml us.png
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+User -> Browser : Open Macro Window
+Browser ->> User : Show languages
+User -> Browser : Select MacroLanguage
+Browser -> User : Confirm Language
+User -> Browser : Insert macro commands
+User -> Browser : execute()
+Browser ->> User : Show success
+User -> Browser : Save Macro
+Browser -> Server : save
+
+database Database
+Server -> Database : save
+
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml  export_design.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary WorkbookView
+control ExportCSVService
+control ExportCSVController
+
+box "NSheets Client"
+participant Browser
+participant WorkbookView 
+end box
+
+box "Server"
+participant ExportCSVService
+participant ExportCSVController
+participant ExportStrategy
+end box
+
+User -> Browser : Export to CSV 
+Browser -> WorkbookView : onClickHandler(exportWindow.show())
+WorkbookView -> ExportCSVService : exportCSV(String [][] sheet, String fileName)
+ExportCSVService -> ExportCSVController :exportCSV(String [][] sheet, String fileName)
+ExportCSVController -> ExportStrategy : exportCSV(String [][] sheet, String fileName)
+ExportStrategy --> ExportCSVController : return downloadLink
+ExportCSVController --> ExportCSVService :
+ExportCSVService --> WorkbookView :  
+WorkbookView --> Browser : return downloadLink
+Browser --> User : returns the download link for the file
+@enduml

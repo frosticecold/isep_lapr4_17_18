@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+    
+    <ui:import field="pt.isep.nsheets.client.place.NameTokens.home"/>         
+	<ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources' />
+	
+	<ui:style>
+	
+	</ui:style>	
+     
+    <g:HTMLPanel ui:field="htmlPanel2">
+
+	<m:MaterialRow marginTop="40">
+    		<g:Hyperlink text="Back to home" targetHistoryToken="{home}" />
+	</m:MaterialRow>
+        
+        <m:MaterialRow>
+            <m:MaterialTextBox ui:field="nome" placeholder="Name of the Chat" label="Name" iconType="MENU"/>
+            <m:MaterialButton ui:field="createPrivateChat" text="Create new Chat Room" waves="RED" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ADD"/>                      
+	</m:MaterialRow>
+	
+        <m:MaterialRow ui:field="htmlPanel" marginTop="30">
+            
+        </m:MaterialRow>
+        
+    </g:HTMLPanel>
+    
+</ui:UiBinder>

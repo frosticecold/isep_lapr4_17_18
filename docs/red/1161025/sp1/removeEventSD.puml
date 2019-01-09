@@ -1,0 +1,45 @@
+@startuml  removeEventSD.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary EventCalendarView
+control EventCalendarPresenter
+control EventServices
+control RemoveEventController
+control EventService
+entity EventRepository
+entity Event
+database Database
+
+box "NSheets Client"
+participant EventCalendarView
+participant EventCalendarPresenter
+end box
+
+box "Server"
+participant EventServices
+participant RemoveEventController
+participant EventService
+participant Event
+participant EventRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> EventCalendarView : click remove event
+EventCalendarView ->> EventServices : removeEvent(title, description)
+EventServices -> RemoveEventController : removeEvent(title, description)
+RemoveEventController -> EventService : removeEvent(title, description)
+EventService -> EventRepository : ev = findByTitleAndDescription(title, description)
+EventService -> EventRepository : delete(ev)
+EventRepository -> Database : delete
+EventServices ->> EventCalendarView : onSuccess()
+EventCalendarView -> EventCalendarView : setContents()
+
+@enduml

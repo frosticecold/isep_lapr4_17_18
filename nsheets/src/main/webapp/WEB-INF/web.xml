@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  GwtMaterial
+  %%
+  Copyright (C) 2015 - 2018 GwtMaterialDesign
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+#L%
+-->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+
+    <!-- Servlets for the workbooks -->
+    <servlet>
+        <servlet-name>workbooksServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.WorkbooksServiceImpl</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>workbooksServiceServlet</servlet-name>
+        <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+        <url-pattern>/nsheets/workbooksService</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>authenticationServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.AuthenticationServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>authenticationServiceServlet</servlet-name>
+        <url-pattern>/nsheets/authentication</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>signUpServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.SignUpServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>signUpServiceServlet</servlet-name>
+        <url-pattern>/nsheets/signUpValidation</url-pattern>
+    </servlet-mapping>
+
+    <!-- André Oliveira <1040862@isep.ipp.pt> -->
+    <servlet>
+        <servlet-name>taskServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.TaskServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>taskServiceServlet</servlet-name>
+        <url-pattern>/nsheets/taskservice</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+        <servlet-name>globalSearchAndReplaceServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.GlobalSearchAndReplaceServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>globalSearchAndReplaceServiceServlet</servlet-name>
+        <url-pattern>/nsheets/globalsearchandreplaceservice</url-pattern>
+    </servlet-mapping>
+
+    <!-- David Blanquett <1161018@isep.ipp.pt> -->
+    <servlet>
+        <servlet-name>searchNReplaceServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.SearchNReplaceServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>searchNReplaceServiceServlet</servlet-name>
+        <url-pattern>/nsheets/searchNReplaceService</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- Servlets for the images -->
+    <servlet>
+        <servlet-name>imageServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ImageServiceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>imageServiceServlet</servlet-name>
+        <url-pattern>/user/imgs</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>eventsServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.EventsServiceImpl</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>eventsServiceServlet</servlet-name>
+        <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+        <url-pattern>/nsheets/eventsService</url-pattern>
+    </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>chatsServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.ChatServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>chatsServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/chatsService</url-pattern>
+  </servlet-mapping>
+
+
+    <!-- Search Service (@author David Camelo <1161294@isep.ipp.pt>) -->
+    <servlet>
+        <servlet-name>searchServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.SearchServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>searchServiceServlet</servlet-name>
+        <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+        <url-pattern>/nsheets/searchService</url-pattern>
+    </servlet-mapping>
+    <!-- - Search Service - -->
+
+    <servlet>
+        <servlet-name>exportToPDFServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportToPDFServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>exportToPDFServiceServlet</servlet-name>
+        <url-pattern>/nsheets/exportToPDFService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>exportToCSVServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportToCSVServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>exportToCSVServiceServlet</servlet-name>
+        <url-pattern>/nsheets/exportToCSVService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>exportToXMLServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportToXMLServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>exportToXMLServiceServlet</servlet-name>
+        <url-pattern>/nsheets/exportToXMLService</url-pattern>
+    </servlet-mapping>
+
+   <servlet>
+        <servlet-name>noteServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.NoteServiceImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>pt.isep.nsheets.nsheets ImportXMLService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ImportXMLServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>noteServiceServlet</servlet-name>
+        <url-pattern>/nsheets/noteService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pt.isep.nsheets.nsheets ImportXMLService</servlet-name>
+        <url-pattern>/nsheets/ImportXMLService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>privatechatServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.PrivateChatServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>privatechatServiceServlet</servlet-name>
+        <url-pattern>/nsheets/privateChatService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>usersServiceServlet</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.UserServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>usersServiceServlet</servlet-name>
+        <url-pattern>/nsheets/usersService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>downloadService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.DownloadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>downloadService</servlet-name>
+        <url-pattern>/nsheets/downloadService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>uploadService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>uploadService</servlet-name>
+        <url-pattern>/nsheets/uploadService</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+		<servlet-name>profileService</servlet-name>
+		<servlet-class>pt.isep.nsheets.server.services.ProfileServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>profileService</servlet-name>
+		<url-pattern>/nsheets/profileService</url-pattern>
+	</servlet-mapping>
+
+    <servlet>
+        <servlet-name>reminderService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ReminderServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>reminderService</servlet-name>
+        <url-pattern>/nsheets/reminderServices</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+    <servlet-name>agendaServiceServlet</servlet-name>
+    <servlet-class>pt.isep.nsheets.server.services.AgendaServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>agendaServiceServlet</servlet-name>
+    <!-- The first "part" of the url is the name of the GWT module as in "rename-to" in .gwt.xml -->
+    <url-pattern>/nsheets/agendaService</url-pattern>
+  </servlet-mapping>
+  <servlet>
+        <servlet-name>exportToCSVFormatService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.ExportToCSVFormatServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>exportToCSVFormatService</servlet-name>
+        <url-pattern>/nsheets/exportToCSVFormatServices</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UploadCSVService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.services.UploadCSVServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadCSVService</servlet-name>
+        <url-pattern>/nsheets/UploadCSVServices</url-pattern>
+    </servlet-mapping>
+
+</web-app>

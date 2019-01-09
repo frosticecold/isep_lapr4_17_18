@@ -1,0 +1,66 @@
+@startuml  design1.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary MenuView
+control TaskPresenter
+boundary CreateTaskWindow
+boundary TaskView
+control TaskController
+control TaskService
+control TaskServiceImpl
+entity TaskDTO
+entity Task
+entity TaskRepository
+database Database
+
+box "NSheets Client"
+participant MenuView
+participant TaskPresenter
+participant TaskView
+participant CreateTaskWindow
+end box
+
+box "Shared"
+participant TaskService
+participant TaskDTO
+participant TaskServiceImpl
+end box
+
+box "Server"
+participant Task
+participant TaskController
+participant TaskRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> MenuView : open Task sub-menu
+MenuView --> TaskPresenter : open()
+TaskPresenter --> TaskView : openWindow()
+TaskView --> CreateTaskWindow : openWindow()
+User -> CreateTaskWindow : inserts required data
+User -> CreateTaskWindow : onClick() / create new task
+CreateTaskWindow -> TaskDTO : new TaskDTO()
+CreateTaskWindow -> TaskServiceImpl : addNewTask(dto)
+TaskServiceImpl -> Task : newTask.fromDTO(dto)
+TaskServiceImpl -> TaskController : addNewTask(newTask)
+TaskController -> TaskRepository : PersistenceContext.repositories().tasks();
+TaskController -> TaskRepository : repo.save(newTask)
+TaskRepository -> Database : save(newTask)
+
+alt Compilation Sucess
+TaskRepository --> TaskPresenter : onSuccess
+TaskPresenter --> User : Uc success scenario
+else Compilation Failure
+TaskRepository --> TaskPresenter : onFailure
+TaskPresenter --> User : Uc failure scenario
+end
+
+@enduml

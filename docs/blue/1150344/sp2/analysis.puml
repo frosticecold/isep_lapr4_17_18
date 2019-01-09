@@ -1,0 +1,23 @@
+@startuml  analysis.png
+skinparam handwritten false
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : navigate to page (workbook) and select Filter
+
+User -> Browser : input the desired cell range, column and the filter formula
+
+User -> Browser : apply the filter
+
+Browser -> Controller : filter
+
+Controller -> Controller : filterCell
+
+Controller -->> Browser : return
+
+Browser -> Browser : display
+
+@enduml

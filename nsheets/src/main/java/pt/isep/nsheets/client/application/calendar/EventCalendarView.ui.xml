@@ -1,0 +1,149 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:ma="urn:import:gwt.material.design.addins.client">
+    
+    <ui:import field="pt.isep.nsheets.client.place.NameTokens.home"/>         
+    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources' />
+	
+    <ui:style>
+	
+    </ui:style>	
+     
+    <m:MaterialPanel>
+        <g:HTMLPanel ui:field="htmlPanel">
+
+            <m:MaterialRow marginTop="40">
+                <g:Hyperlink text="Back to home" targetHistoryToken="{home}" />
+            </m:MaterialRow>
+        </g:HTMLPanel>
+        
+        <m:MaterialRow>
+            <m:MaterialButton ui:field="createEvent" text="Create Event" waves="LIGHT" textColor="WHITE" iconType="EVENT" iconPosition="LEFT"/>
+            <m:MaterialButton ui:field="editEvent" text="Edit Event" waves="LIGHT" textColor="WHITE" iconType="EVENT" iconPosition="LEFT"/>
+            <m:MaterialButton ui:field="showEvent" text="Show Events" waves="LIGHT" textColor="WHITE" iconType="EVENT" iconPosition="LEFT"/>
+            <m:MaterialButton ui:field="deleteEvent" text="Delete Event" waves="LIGHT" textColor="WHITE" iconType="EVENT" iconPosition="LEFT"/>
+        </m:MaterialRow>
+        
+        
+        <ma:window.MaterialWindow ui:field="windowCreateEvent" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="440px">
+                <m:MaterialListValueBox ui:field="listCalendars" emptyPlaceHolder="Select a Calendar:"/>
+                <m:MaterialTextBox ui:field="title" placeholder="Title for the event" label="Title" iconType="MENU"/>
+                <m:MaterialTextBox ui:field="desc" placeholder="Description for the event" label="Description" iconType="MENU"/>
+                <m:MaterialTextBox ui:field="dur" placeholder="Duration of the event(in hours)" label="Duration" iconType="AV_TIMER"/>
+                <ma:timepicker.MaterialTimePicker ui:field="time" placeholder="Time of the event" hour24="true" iconType="AV_TIMER"/>
+                <m:MaterialDatePicker ui:field="dp" autoClose="true" placeholder="Date for the event" iconType="EVENT"/>
+                
+                
+                <m:MaterialButton ui:field="create" text="Create Event" waves="RED" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+                <m:MaterialButton ui:field="cancelEvent" text="Cancel" waves="RED" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+               
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+        
+        <ma:window.MaterialWindow ui:field="windowEditEvent" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="440px">
+                <m:MaterialListValueBox ui:field="listEvent" emptyPlaceHolder="Select a Event:"/>
+                <m:MaterialTextBox ui:field="titleEdit" placeholder="Title for the event" label="Title" iconType="MENU"/>
+                <m:MaterialTextBox ui:field="descEdit" placeholder="Description for the event" label="Description" iconType="MENU"/>
+                <m:MaterialListValueBox ui:field="listCalendarsEdit" emptyPlaceHolder="Select a Calendar:"/>
+                <m:MaterialTextBox ui:field="durEdit" placeholder="Duration of the event(in hours)" label="Duration" iconType="AV_TIMER"/>
+                <ma:timepicker.MaterialTimePicker ui:field="timeEdit" placeholder="Time of the event" hour24="true" iconType="AV_TIMER"/>
+                <m:MaterialDatePicker ui:field="dpEdit" autoClose="true" placeholder="Date for the event" iconType="EVENT"/>
+                <m:MaterialButton ui:field="creEdit" text="Edit Event" waves="RED" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+                <m:MaterialButton ui:field="cancelEventEdit" text="Cancel" waves="RED" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+        
+        <ma:window.MaterialWindow ui:field="windowListEvent" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="350px">
+                <m:MaterialListValueBox ui:field="showEventList" emptyPlaceHolder="" />
+                <m:MaterialButton marginTop="50" ui:field="creList" text="Ok" waves="RED" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+        
+        <ma:window.MaterialWindow ui:field="windowDeleteEvent" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="350px">
+                <m:MaterialListValueBox ui:field="listEventDelete" emptyPlaceHolder="Select a Event:"/>
+                <m:MaterialButton ui:field="creDelete" text="Delete Event" waves="RED" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+                <m:MaterialButton ui:field="cancelEventDelete" text="Cancel" waves="RED" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+        
+        <m:MaterialRow>
+            <m:MaterialButton ui:field="createCalendar" text="Create Calendar" waves="LIGHT" backgroundColor="GREEN" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+            <m:MaterialButton ui:field="editCalendar" text="Edit Calendar" waves="LIGHT" backgroundColor="GREEN" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+            <m:MaterialButton ui:field="deleteCalendar" text="Delete Calendar" waves="LIGHT" backgroundColor="GREEN" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+            <m:MaterialButton ui:field="viewEvent" text="View all Events" waves="LIGHT" backgroundColor="GREEN" textColor="WHITE" iconType="EVENT" iconPosition="LEFT"/>
+        </m:MaterialRow>
+        
+        <m:MaterialRow>
+            <m:MaterialButton ui:field="viewEventCalendar" text="View all Events by calendar" waves="LIGHT" backgroundColor="GREEN" textColor="WHITE" iconType="EVENT" iconPosition="LEFT"/>
+        </m:MaterialRow>
+        
+       
+        
+        <ma:window.MaterialWindow ui:field="windowCreateCalendars" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="350px">
+                <m:MaterialTextBox ui:field="name" placeholder="Name for the calendar" label="Name" iconType="MENU"/>
+                <m:MaterialTextBox ui:field="description" placeholder="Description for the calendar" label="Description" iconType="MENU"/>
+                <m:MaterialListValueBox ui:field="ColorCalendarList" emptyPlaceHolder="Select a Calendar Color:"/>
+                <m:MaterialButton marginTop="50" ui:field="createCal" text="Create Calendar" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+                <m:MaterialButton marginTop="50" ui:field="cancel" text="Cancel" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+	
+        <ma:window.MaterialWindow ui:field="windowEditCalendars" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="350px">
+                <m:MaterialListValueBox ui:field="CalendarListEdit" emptyPlaceHolder="Select a Calendar:"/>
+                <m:MaterialTextBox ui:field="nameEdit" placeholder="Edit name for the calendar" label="Name" iconType="MENU"/>
+                <m:MaterialTextBox ui:field="descriptionEdit" placeholder="Edit description for the calendar" label="Description" iconType="MENU"/>
+                <m:MaterialListValueBox ui:field="ColorCalendarListEdit" emptyPlaceHolder="Select a Calendar Color:"/>
+               
+                <m:MaterialButton marginTop="50" ui:field="editCal" text="Edit Calendar" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+                <m:MaterialButton marginTop="50" ui:field="cancelEdit" text="Cancel" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+        
+        <ma:window.MaterialWindow ui:field="windowDeleteCalendars" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="350px">
+                <m:MaterialListValueBox ui:field="CalendarListDelete" emptyPlaceHolder="Select a Calendar:"/>
+                <m:MaterialButton marginTop="50" ui:field="deleteCal" text="Delete Calendar" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+                <m:MaterialButton marginTop="50" ui:field="cancelDelete" text="Cancel" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+        
+    
+        
+        <ma:window.MaterialWindow ui:field="windowViewEvents" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="350px">
+                <m:MaterialCollectionItem ui:field="content">
+                    <m:MaterialCard ui:field="mCard" />
+                </m:MaterialCollectionItem>
+                <m:MaterialButton ui:field="close" text="close" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+        
+        <ma:window.MaterialWindow ui:field="windowViewCalendar" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="350px">
+                <m:MaterialListValueBox ui:field="calendarListChoose" emptyPlaceHolder="Select a Calendar :"/>
+                <m:MaterialCollectionItem ui:field="contentCalendar">
+                    <m:MaterialCard ui:field="mCardCalendar"/>
+                </m:MaterialCollectionItem>
+                <m:MaterialButton ui:field="filterCalendar" text="Filter Calendar" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+                <m:MaterialButton ui:field="closeCalendar" text="Cancel" backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+            
+        </ma:window.MaterialWindow>
+    </m:MaterialPanel>
+</ui:UiBinder>

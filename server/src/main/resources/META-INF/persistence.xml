@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
+  <persistence-unit name="lapr4.NSheetsPU">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>pt.isep.nsheets.server.lapr4.white.s1.core.n4567890.workbooks.domain.WorkbookDescription</class>
+    <class>pt.isep.nsheets.server.lapr4.green.s1.ipc.n1160818.userAuthentication.domain.User</class>
+    <class>pt.isep.nsheets.server.lapr4.green.s1.ipc.n1161261.chat.domain.PublicChat</class>
+    <class>pt.isep.nsheets.server.lapr4.green.s1.ipc.n1161261.chat.domain.Message</class>
+    <class>pt.isep.nsheets.server.lapr4.green.s1.ipc.n1160818.userAuthentication.domain.User</class>
+    <class>pt.isep.nsheets.server.lapr4.green.s1.ipc.n1160818.userAuthentication.domain.User</class>
+    <class>pt.isep.nsheets.shared.core.Workbook</class>
+    <!--<class>pt.isep.nsheets.shared.lapr4.blue.s1.lang.n1131485.macro.domain.Macro</class>-->
+    <class>pt.isep.nsheets.shared.core.CellImpl</class>
+    <class>pt.isep.nsheets.shared.core.Address</class>
+    <class>pt.isep.nsheets.shared.core.Value</class>
+    <class>pt.isep.nsheets.shared.core.SpreadsheetImpl</class>
+    <!--<class>pt.isep.nsheets.shared.core.formula.lang.Language</class>-->
+    <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161391.notes.domain.Note</class>
+    <class>pt.isep.nsheets.server.lapr4.red.s2.ipc.n1161025.privatechat.domain.MessagePrivate</class>
+    <class>pt.isep.nsheets.server.lapr4.red.s2.ipc.n1161025.privatechat.domain.PrivateChat</class>
+    <class>pt.isep.nsheets.server.lapr4.s2.core.n1040862.task.domain.Task</class>
+    <class>pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.Reminder</class>
+    <class>pt.isep.nsheets.server.lapr4.green.s3.core.n1161261.agenda.domain.Agenda</class>
+    <class>pt.isep.nsheets.server.lapr4.blue.s3.ipc.n1131485.domain.Session</class>
+    <class>pt.isep.nsheets.shared.lapr4.blue.s3.ipc.n1090657.ipc.Access</class>
+    <class>pt.isep.nsheets.shared.lapr4.blue.s3.ipc.n1090657.ipc.AccessList</class>
+    <class>pt.isep.nsheets.server.lapr4.red.s1.core.n1161025.calendar.domain.Event</class>
+    <properties>
+      <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:../db/ecafeteria;MV_STORE=FALSE"/>-->
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:./db/nsheets;MV_STORE=FALSE"/>
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+      <property name="javax.persistence.jdbc.user" value=""/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <!--<property name="eclipselink.logging.level" value="FINE"/>-->
+    </properties>
+  </persistence-unit>
+</persistence>

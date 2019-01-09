@@ -1,0 +1,13 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+actor User
+
+User->System : Open the workbook wizard
+System --> User : Opens the Workbook Wizard User Interface
+
+User->System : Inputs the desired data and confirms
+System -> System : Sends the data into the Workbook User Interface
+System --> User: Shows the user the success of the operation
+@enduml

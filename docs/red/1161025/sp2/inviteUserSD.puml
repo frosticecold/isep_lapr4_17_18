@@ -1,0 +1,51 @@
+@startuml  listEventsSD.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary PrivateChatView
+control PrivateChatPresenter
+control PrivateChatServices
+control InviteUserController
+control PrivateChatService
+entity PrivateChatRepository
+entity PrivateChat
+entity UserRepository
+database Database
+
+box "NSheets Client"
+participant PrivateChatView
+participant PrivateChatPresenter
+end box
+
+box "Server"
+participant PrivateChatServices
+participant InviteUserController
+participant PrivateChatService
+participant PrivateChat
+participant PrivateChatRepository
+participant UserRepository
+
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> PrivateChatView : insert user email
+User -> PrivateChatView : onClick()
+PrivateChatView ->> PrivateChatServices :inviteUser(email, pchatName)
+PrivateChatServices -> InviteUserController : inviteUser(email, pchatName)
+InviteUserController -> PrivateChatService : inviteUser(email, pchatName)
+PrivateChatService -> UserRepository : u = findUserByEmail(email)
+UserRepository -> Database : fetch
+PrivateChatService -> PrivateChatRepository : pc = findPChatByName(pchatName)
+PrivateChatRepository -> Database : fetch
+PrivateChatService -> PrivateChat : add(u)
+PrivateChatServices ->> PrivateChatPresenter : onSuccess()
+PrivateChatPresenter ->PrivateChatView : setContents()
+
+@enduml

@@ -1,0 +1,123 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:ma="urn:import:gwt.material.design.addins.client">
+
+    <m:MaterialPanel>
+
+        <m:MaterialHeader>
+            <m:MaterialRow marginTop="60">
+                <m:MaterialTextBox
+                        m:id="fBox" ui:field="filterTextField" placeholder="Filter"
+                        label="Enter a filter for advanced searching"
+                        active="true" grid="s11"/>
+
+                <m:MaterialIcon ui:field="searchButton" iconType="SEARCH" iconColor="BLUE" waves="DEFAULT" circle="true"
+                                grid="s1"/>
+            </m:MaterialRow>
+        </m:MaterialHeader>
+
+        <m:MaterialHeader>
+            <m:MaterialRow marginTop="60">
+                <m:MaterialButton ui:field="ShowPublicWorkbook" text="Show Public Workbook Event" waves="RED"
+                                  backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+                <m:MaterialButton ui:field="ShowPrivateWorkbook" text="Show Private Workbook" waves="RED"
+                                  backgroundColor="GREY_DARKEN_3" textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialRow>
+        </m:MaterialHeader>
+
+        <g:HTMLPanel ui:field="htmlPanel"/>
+
+        <m:MaterialFAB>
+            <m:MaterialButton type="FLOATING" iconType="ADD" size="LARGE"/>
+            <m:MaterialFABList>
+                <m:MaterialButton ui:field="newPublicWorkbookButton" type="FLOATING" waves="LIGHT"
+                                  iconType="INSERT_DRIVE_FILE" tooltip="New Public Workbook" tooltipPosition="LEFT"/>
+
+                <m:MaterialButton ui:field="newPrivateWorkbookButton" type="FLOATING" waves="LIGHT"
+                                  iconType="INSERT_DRIVE_FILE" tooltip="New Private Workbook" tooltipPosition="LEFT"/>
+
+                <m:MaterialButton ui:field="importFromXML" type="FLOATING" waves="LIGHT"
+                                  iconType="FILE_UPLOAD" tooltip="Import From XML" tooltipPosition="LEFT"/>
+            </m:MaterialFABList>
+        </m:MaterialFAB>
+
+        <ma:window.MaterialWindow ui:field="importFromXMLPopUp" title="Import From XML" height="400px" width="400px">
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+                <m:MaterialLabel text="Import From XML" marginTop="10"/>
+
+                <m:MaterialPanel ui:field="filePanel"/>
+
+                <m:MaterialButton ui:field="startImportWorkbookXML" text="Import Workbook" waves="LIGHT"
+                                  textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+
+                <m:MaterialButton ui:field="startImportSpreadsheetXML" text="Import SpreadSheet" waves="LIGHT"
+                                  textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+
+                <m:MaterialButton ui:field="startImportPartOfSpreadsheetXML" text="Import Part Of SpreadSheet"
+                                  waves="LIGHT"
+                                  textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+        <ma:window.MaterialWindow ui:field="shareWorkbookWindow" title="Share workbook with" height="400px" width="600px">
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="importWorkbookFromXMLPopUp" title="Import Workbook From XML" height="400px"
+                                  width="400px">
+            <m:MaterialPanel padding="15">
+                <m:MaterialRow>
+                    <m:MaterialLabel text="Name: " float="LEFT"/>
+                    <m:MaterialTextBox ui:field="workbookName" active="true" float="NONE"/>
+
+                    <m:MaterialLabel text="Description: " float="LEFT"/>
+                    <m:MaterialTextBox ui:field="workbookDescription" active="true" float="NONE"/>
+
+                    <m:MaterialButton ui:field="submitButtonWorkbook" iconType="CHECK" type="FLOATING" waves="LIGHT"/>
+                </m:MaterialRow>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="importSpreadsheetFromXMLPopUp" title="Import Spreadsheet From XML"
+                                  height="400px"
+                                  width="400px">
+            <m:MaterialPanel padding="15">
+                <m:MaterialRow>
+                    <m:MaterialLabel text="New name: " float="LEFT"/>
+                    <m:MaterialTextBox ui:field="test2" active="true" float="NONE"/>
+                    <!-- <m:MaterialButton ui:field="checkButton" iconType="CHECK" type="FLOATING" waves="LIGHT"/> -->
+                </m:MaterialRow>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="importPartOfSpreadsheetFromXMLPopUp"
+                                  title="Import Part Of Spreadsheet From XML" height="400px"
+                                  width="400px">
+            <m:MaterialPanel padding="15">
+                <m:MaterialRow>
+                    <m:MaterialLabel text="New name: " float="LEFT"/>
+                    <m:MaterialTextBox ui:field="test3" active="true" float="NONE"/>
+                    <!-- <m:MaterialButton ui:field="checkButton" iconType="CHECK" type="FLOATING" waves="LIGHT"/> -->
+                </m:MaterialRow>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="popUpView" title="Edit Workbook" height="400px" width="400px">
+            <m:MaterialPanel padding="32">
+                <m:MaterialRow>
+                    <m:MaterialLabel text="New name: " float="LEFT"/>
+                    <m:MaterialTextBox ui:field="nameText" active="true" float="NONE"/>
+                    <!-- <m:MaterialButton ui:field="checkButton" iconType="CHECK" type="FLOATING" waves="LIGHT"/> -->
+                </m:MaterialRow>
+                <m:MaterialRow>
+                    <m:MaterialLabel text="New description: " float="LEFT"/>
+                    <m:MaterialTextBox ui:field="descText" active="true" float="NONE"/>
+                    <!-- <m:MaterialButton ui:field="checkButton2" iconType="CHECK" type="FLOATING" waves="LIGHT"/> -->
+                </m:MaterialRow>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+    </m:MaterialPanel>
+
+
+</ui:UiBinder>

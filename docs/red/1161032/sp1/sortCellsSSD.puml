@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+actor User
+
+User -> Browser : open sort window
+
+Browser ->> Server : opens sort window
+
+Server -->> Browser : asks for information (2 addresses and a pressed button)
+
+Browser -->> User : asks for information
+
+User ->> Browser : types the information and presses the button
+
+Browser ->> Server : sends the information required
+
+Server -->> Browser : shows the selected area sorted accordingly to the chosen button
+
+Browser -->> User : shows the final result
+
+@enduml

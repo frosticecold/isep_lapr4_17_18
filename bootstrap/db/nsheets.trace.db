@@ -1,0 +1,90 @@
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "WORKBOOKDESCRIPTION" not found; SQL statement:
+SELECT ID FROM WORKBOOKDESCRIPTION WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+SELECT ID FROM USER WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PUBLICCHAT" not found; SQL statement:
+SELECT ID FROM PUBLICCHAT WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MESSAGE" not found; SQL statement:
+SELECT ID FROM MESSAGE WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "WORKBOOK" not found; SQL statement:
+SELECT ID FROM WORKBOOK WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CELLIMPL" not found; SQL statement:
+SELECT ID FROM CELLIMPL WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "SPREADSHEETIMPL" not found; SQL statement:
+SELECT ID FROM SPREADSHEETIMPL WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MESSAGEPRIVATE" not found; SQL statement:
+SELECT ID FROM MESSAGEPRIVATE WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRIVATECHAT" not found; SQL statement:
+SELECT ID FROM PRIVATECHAT WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TASK" not found; SQL statement:
+SELECT ID FROM TASK WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "REMINDER" not found; SQL statement:
+SELECT ID FROM REMINDER WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT NAME FROM AGENDA WHERE NAME <> NAME [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "SESSION" not found; SQL statement:
+SELECT ID FROM SESSION WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ACCESS" not found; SQL statement:
+SELECT ID FROM ACCESS WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ACCESSLIST" not found; SQL statement:
+SELECT ID FROM ACCESSLIST WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_BLOCKEDUSERS" not found; SQL statement:
+SELECT EMAIL FROM User_BLOCKEDUSERS WHERE EMAIL <> EMAIL [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_CONTACTS" not found; SQL statement:
+SELECT EMAIL FROM User_CONTACTS WHERE EMAIL <> EMAIL [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_INVITATIONS" not found; SQL statement:
+SELECT EMAIL FROM User_INVITATIONS WHERE EMAIL <> EMAIL [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_WORKBOOKDESCRIPTION" not found; SQL statement:
+SELECT workbooks_ID FROM USER_WORKBOOKDESCRIPTION WHERE workbooks_ID <> workbooks_ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "WORKBOOK_MACROS" not found; SQL statement:
+SELECT Workbook_ID FROM Workbook_MACROS WHERE Workbook_ID <> Workbook_ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "WORKBOOK_SPREADSHEETIMPL" not found; SQL statement:
+SELECT spreadsheets_ID FROM WORKBOOK_SPREADSHEETIMPL WHERE spreadsheets_ID <> spreadsheets_ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CELLIMPL_DEPENDENTS" not found; SQL statement:
+SELECT CellImpl_ID FROM CellImpl_DEPENDENTS WHERE CellImpl_ID <> CellImpl_ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CELLIMPL_PRECEDENTS" not found; SQL statement:
+SELECT CellImpl_ID FROM CellImpl_PRECEDENTS WHERE CellImpl_ID <> CellImpl_ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS_CELLS" not found; SQL statement:
+SELECT SpreadsheetImpl_ID FROM Address_Cells WHERE SpreadsheetImpl_ID <> SpreadsheetImpl_ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE_VERSIONS" not found; SQL statement:
+SELECT Note_ID FROM Note_VERSIONS WHERE Note_ID <> Note_ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TASK_TASKCONTACTLIST" not found; SQL statement:
+SELECT EMAIL FROM Task_TASKCONTACTLIST WHERE EMAIL <> EMAIL [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ACCESSLIST_ACCESS" not found; SQL statement:
+SELECT list_ID FROM ACCESSLIST_ACCESS WHERE list_ID <> list_ID [42102-191]
+2018-06-18 20:25:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "SEQUENCE" not found; SQL statement:
+SELECT SEQ_NAME FROM SEQUENCE WHERE SEQ_NAME <> SEQ_NAME [42102-191]

@@ -1,0 +1,18 @@
+@startuml  analysis.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User ->Client  : calls a macro execution
+Client->Server : executeMacro(macro)
+Server->Server : findMacroInCurrentWorkbook(macro)
+Server->Server : commands : getMacroCommands()
+Server->Server : executeCommands(commands)
+Server->Client : returns the value of the macro execution
+Client->User   : informs user of success or insuccess
+
+@enduml

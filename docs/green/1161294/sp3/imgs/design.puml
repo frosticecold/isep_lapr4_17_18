@@ -1,0 +1,19 @@
+@startuml design.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Ui_MainUI : open worksheet
+Ui_MainUI -> MainUi_Controller : loads worksheet()
+
+User -> Ui_MainUI : set image
+Ui_MainUI -> MainUi_Controller : addImageExtension()
+
+MainUi_Controller -> ExtensionManager : addExtension(extension)
+
+MainUi_Controller ->  Ui_MainUI : show extension
+@enduml

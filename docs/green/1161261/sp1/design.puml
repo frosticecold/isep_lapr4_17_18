@@ -1,0 +1,45 @@
+@startuml  design.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary ChatView
+control ChatPresenter
+control ChatServices
+control ChatController
+control PublicChatService
+entity ChatReportingRepository
+database Database
+
+box "NSheets Client"
+participant ChatView
+participant ChatPresenter
+end box
+
+box "Server"
+participant ChatServices
+participant ChatController
+participant PublicChatService
+participant ChatReportingRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+
+
+User -> ChatPresenter : adds new page/view
+ChatPresenter ->> ChatServices : getPublicChat()
+ChatServices -> ChatController : allChats()
+ChatController ->> PublicChatService : getChats()
+PublicChatService ->> ChatReportingRepository : getPublicChat()
+ChatReportingRepository -> Database : fetch
+ChatServices ->> ChatPresenter : onSuccess()
+ChatPresenter -> ChatView : setContents()
+
+
+@enduml

@@ -1,0 +1,18 @@
+@startuml  us.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+User -> (US5: Filter based on their fields)
+User -> (US4: Sort based on their fields)
+User -> (US3: Remove a task)
+User -> (US2: Edit a task)
+User -> (US1: Create a task)
+
+
+
+
+
+@enduml

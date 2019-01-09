@@ -1,0 +1,60 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:ma="urn:import:gwt.material.design.addins.client">
+
+    <ui:import field="pt.isep.nsheets.client.place.NameTokens.home"/>
+    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources'/>
+
+    <ui:style>
+    </ui:style>
+
+    <g:HTMLPanel ui:field="header">
+        <m:MaterialRow marginTop="60">
+            <g:Hyperlink text="Back to home" targetHistoryToken="{home}"/>
+            <m:MaterialSection/>
+            <m:MaterialButton ui:field="createReminder" text="Create Reminder" iconType="ADD" marginLeft="11"/>
+        </m:MaterialRow>
+        <g:HTMLPanel ui:field="htmlPanel">
+        </g:HTMLPanel>
+
+        <ma:window.MaterialWindow ui:field="windowCreate" title="Create new reminder">
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="600px">
+                <m:MaterialTextBox ui:field="title" placeholder="Title of the reminder.." label="Title"
+                                   iconType="MENU"/>
+                <m:MaterialTextBox ui:field="desc" placeholder="Description of the reminder.." label="Description"
+                                   iconType="MENU"/>
+                <m:MaterialDatePicker ui:field="date" autoClose="true" placeholder="Date of the reminder.."
+                                      iconType="EVENT"/>
+                <m:MaterialTextBox ui:field="time" placeholder="Time of the day.." label="Time(HH:MM)"
+                                   iconType="AV_TIMER"/>
+                <m:MaterialButton ui:field="save" text="Save Reminder" waves="RED" backgroundColor="GREY_DARKEN_3"
+                                  textColor="WHITE" iconType="ARROW_FORWARD" marginRight="20"/>
+                <m:MaterialButton ui:field="cancelCreate" text="Cancel" waves="RED" backgroundColor="GREY_DARKEN_3"
+                                  textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowEdit" title="Edit existing reminder..">
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="600px">
+                <m:MaterialTextBox ui:field="titleEdit" placeholder="Title of the reminder.." label="Title"
+                                   iconType="MENU"/>
+                <m:MaterialTextBox ui:field="descEdit" placeholder="Description of the reminder.." label="Description"
+                                   iconType="MENU"/>
+                <m:MaterialDatePicker ui:field="dateEdit" autoClose="true" placeholder="Date of the reminder.."
+                                      iconType="EVENT"/>
+                <m:MaterialTextBox ui:field="timeEdit" placeholder="Time of the day.." label="Time(HH:MM)"
+                                   iconType="AV_TIMER"/>
+                <m:MaterialButton ui:field="saveEdit" text="Save Changes" waves="RED" backgroundColor="GREY_DARKEN_3"
+                                  textColor="WHITE" iconType="ARROW_FORWARD" marginRight="20"/>
+                <m:MaterialButton ui:field="cancelEdit" text="Cancel" waves="RED" backgroundColor="GREY_DARKEN_3"
+                                  textColor="WHITE" iconType="ARROW_FORWARD"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+    </g:HTMLPanel>
+
+
+
+</ui:UiBinder>

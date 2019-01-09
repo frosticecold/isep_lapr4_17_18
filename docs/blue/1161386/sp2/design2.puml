@@ -1,0 +1,45 @@
+@startuml  design2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary MenuView
+control MenuPresenter
+control NoteService
+control NoteController
+control NoteServiceImpl
+entity NoteRepository
+entity UserRepository
+database Database 
+
+box "NSheets Client"
+participant MenuView
+participant MenuPresenter 
+end box
+
+box "Server"
+participant NoteServiceImpl
+participant NoteController
+participant NoteService
+participant UserRepository
+participant NoteRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> MenuPresenter : onReveal() / navigate to page 
+MenuPresenter ->> NoteServiceImpl: editNote(Note note, User username)
+NoteServiceImpl -> NoteController : editNote(Note note, User username)
+NoteController -> UserRepository: User user = getUserByUsername(String username)
+NoteController -> NoteService : editNote(Note note, User username)
+NoteService -> NoteRepository : editNote(Note note, User username)
+NoteRepository -> Database : fetch
+NoteController ->> MenuPresenter : onSuccess() 
+MenuPresenter -> MenuView : refreshNotes()
+
+@enduml

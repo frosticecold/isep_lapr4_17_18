@@ -1,0 +1,46 @@
+'1150710@isep.ipp.pt
+@startuml create_chart_core_9.png
+    skinparam handwritten false
+    skinparam monochrome false
+    skinparam packageStyle rect
+    skinparam defaultFontName FG Virgil
+    skinparam shadowing false
+
+  box "Chart Creation"
+    actor user
+    participant "ChartWizzardView"
+    participant "ChartWizzardPresenter"
+    participant "ChartWizardController"
+    participant "BarChartCreator"
+    participant "ChartCreatorInterface"
+    participant Database
+
+  end box
+
+
+    user -> ChartWizzardView : selects active workbook
+
+    ChartWizzardView->ChartWizzardPresenter : getActiveWorkbook(Workbook dto)
+
+    ChartWizzardPresenter-> ChartWizardController : getActiveWorkbook(Workbook DTO)
+
+    ChartWizardController-> Database : getWorkbook(WorkbookDTO)
+
+    ChartWizzardView -> user : asks for info to the Chart
+
+    user -> ChartWizzardView :insert info
+
+    ChartWizzardView->ChartWizzardPresenter: insertInfo(name,Labels on rows or collumns)
+
+    ChartWizzardPresenter->ChartWizardController: insertInfo(name,Labels on rows or collumns,dataRange)
+
+    ChartWizardController->BarChartCreator: create()
+
+    ChartWizzardView->user: shows chart
+
+
+
+
+
+
+@enduml

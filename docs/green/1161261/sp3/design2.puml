@@ -1,0 +1,51 @@
+@startuml  design2
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary CalendarView.ui
+control CalendarView
+entity WindowEditCalendars
+control AgendaService
+control AgendaController
+control AgendasService
+database Database
+
+box "Calendar"
+participant CalendarView.ui
+participant CalendarView
+end box
+
+box "Server"
+participant AgendaController
+participant AgendasService
+participant AgendaService
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> CalendarView.ui : click edit calendar
+CalendarView.ui -> CalendarView : onClick()
+create WindowEditCalendars
+CalendarView -> WindowEditCalendars : createWindow()
+CalendarView -> WindowEditCalendars : open()
+WindowEditCalendars -> AgendaService : getAgenda()
+AgendaService -> AgendaController : getAgenda()
+AgendaController -> AgendasService : getAgenda()
+AgendasService -> Database : findAll()
+AgendaService ->> WindowEditCalendars : lists calendars
+User -> WindowEditCalendars : Selects a calendar
+WindowEditCalendars ->> User : Asks for name, description and color
+User -> WindowEditCalendars : Inserts new name, description and color
+WindowEditCalendars -> AgendaService : save(agendaDTO)
+AgendaService -> AgendaController : save(agendaDTO)
+AgendaController -> AgendasService : save(agendaDTO)
+AgendasService -> Database : save(DTO)
+AgendaService ->> WindowEditCalendars : onSuccess(DTO)
+
+@enduml

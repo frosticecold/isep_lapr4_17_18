@@ -1,0 +1,10 @@
+/**
+ * @startuml
+ * User -> Browser : navigate to page (calendar) and chose the wanted option
+ * User -> Browser : select the wanted options
+ * User -> Browser : confirm options
+ * Browser -> Controller : apply functions
+ * Controller -> Browser : return
+ *
+ * @enduml
+ */

@@ -1,0 +1,19 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+User -> HomeView: Clicks create workbook button
+HomeView -> HomePresenter: clickHandler()
+HomePresenter -> User: Request title and description
+User -> HomePresenter: Inserts workbook title and description
+HomePresenter -> HomePresenter: creates blank workbook and workbook description with provided info
+HomePresenter -> WorkbooksServiceImpl: addWorkbookDescription()
+WorkbooksServiceImpl -> WorkbooksServiceImpl: new AddWorkbookDescriptionController()
+WorkbooksServiceImpl -> AddWorkbookDescriptionController: ctrl.addWorkbookDescription()
+AddWorkbookDescriptionController -> WorkbookDescriptionService: addWorkbookDescription(dto)
+WorkbookDescriptionService -> WorkbookDescriptionService: PersistenceContext.repositories().workbookDescriptions(); WorkbookDescription wb = WorkbookDescription.fromDTO();
+WorkbookDescriptionService -> repo: save()
+
+HomeView -> User: Display newly created workbook in homepage.
+
+@enduml

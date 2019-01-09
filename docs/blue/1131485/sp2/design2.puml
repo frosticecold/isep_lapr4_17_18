@@ -1,0 +1,70 @@
+@startuml  design2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary ChartWizzardView
+
+database Database
+
+box "NSheets Client"
+participant ChartWizzardView
+participant ChartWizzardPresenter 
+
+end box
+
+box "Server"
+
+participant createChartController
+participant saveChartController
+participant listChartsController
+
+end box
+
+box "Database"
+
+participant Database
+
+end box
+
+
+User -> ChartWizzardPresenter : onClick()
+
+ChartWizzardPresenter -> ChartWizzardView : opensView()
+
+ChartWizzardPresenter -> listChartsController : List<Chart> = loadCharts()
+
+ChartWizzardPresenter -> ChartWizzardView : presentsCharts(List<Chart>)
+
+loop EveryEdit 
+
+User -> ChartWizzardView : chooses chart
+
+User -> ChartWizzardView : edit Chart
+
+ChartWizzardView -> ChartWizzardPresenter : editContent(index)
+
+ChartWizzardView -> ChartWizzardPresenter : displayChart(index)
+
+ChartWizzardPresenter -> createChartController : displayChart(Chart)
+
+ChartWizzardPresenter -> ChartWizzardView : displayChartsContent()
+
+end
+
+User -> ChartWizzardView : wants to save chart
+
+ChartWizzardView -> ChartWizzardPresenter : saveChart(index)
+
+ChartWizzardPresenter -> saveChartController : saveChart(Chart)
+
+saveChartController -> Database : saveChart(Chart)
+
+ChartWizzardPresenter -> ChartWizzardView : msg = makeFeedback()
+
+ChartWizzardView -> User : showsFeedback(msg)
+
+@enduml

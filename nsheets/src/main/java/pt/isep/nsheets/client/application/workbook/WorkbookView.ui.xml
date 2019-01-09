@@ -1,0 +1,818 @@
+<!-- #%L GwtMaterial %% Copyright (C) 2015 - 2018 GwtMaterialDesign %% Licensed
+under the Apache License, Version 2.0 (the "License"); you may not use this 
+file except in compliance with the License. You may obtain a copy of the 
+License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by 
+applicable law or agreed to in writing, software distributed under the License 
+is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY 
+KIND, either express or implied. See the License for the specific language 
+governing permissions and limitations under the License. #L% -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:ma="urn:import:gwt.material.design.addins.client"   xmlns:m.html="urn:import:gwt.material.design.client.ui.html"    xmlns:c="urn:import:gwt.material.design.addins.client.combobox">
+
+
+    <ui:with field="res" type="pt.isep.nsheets.client.resources.AppResources" />
+
+    <ui:with field="tokens" type="pt.isep.nsheets.client.place.NameTokens"/>
+
+    <ui:style>
+
+        /* The column with the row numbers */
+        #col0 {
+        background: #e0e0e0;
+        }
+
+        label { color:black; }
+        .red { color:red; }
+        .blue { color:blue; }
+
+        /* The column header name should use 100% of the column width */
+        #customTable table thead th span {
+        max-width: 100% !important;
+        }
+
+        /* Remove the padding in the columns so that the cell occupies the all width */
+        #customTable table thead tr th {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        color: #3f3f3f;
+        background: #e0e0e0;
+        border-bottom: 2px solid #1976d2;
+        border-right: 2px solid #1976d2;
+        }
+
+        /* Remove pading in the cells (table data) */
+        #customTable table tbody td {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        }
+
+    </ui:style>
+    <m:MaterialPanel marginTop="10">
+        <g:HTMLPanel ui:field="htmlPanel">
+            
+            <m:MaterialLink href="#form" text="FORM" textColor="BLUE" iconType="CREDIT_CARD" iconPosition="LEFT"/>
+            <ma:window.MaterialWindow ui:field="importWindow" title="Import file" toolbarColor="BLUE_DARKEN_2">
+                <m:MaterialPanel ui:field="fileChooser"/>
+                <m:MaterialButton ui:field="uploadFilebutton" text="Load file" type="FLOATING" iconType="CLOUD_UPLOAD"/>
+            </ma:window.MaterialWindow>
+            <m:MaterialRow>
+                <m:MaterialRow marginTop="20">
+                    <m:MaterialPanel>
+                        <m:MaterialIcon ui:field="functionButton" iconType="FUNCTIONS" iconColor="BLUE" waves="DEFAULT" size="MEDIUM" iconPosition="LEFT" grid="s0.5" marginTop="25"/>
+                        <m:MaterialTextBox m:id="fBox" ui:field="firstBox" placeholder="Enter your formula for the active cell" label="Enter your formula for the active cell" active="true" width="70%" grid="s1"/>
+                        <m:MaterialIcon ui:field="searchButton" iconType="SEARCH" iconColor="BLUE" waves="DEFAULT" circle="true" marginTop="25"/>
+                        <m:MaterialIcon ui:field="firstButton" iconType="DONE" iconColor="BLUE" waves="DEFAULT" circle="true" marginTop="25"/>
+                    </m:MaterialPanel>
+                    <m:MaterialFAB>
+                        <m:MaterialButton type="FLOATING" iconType="FILE_DOWNLOAD" size="LARGE"/>
+                        <m:MaterialFABList>
+                            <m:MaterialButton ui:field="importCSVbutton" type="FLOATING" waves="LIGHT" iconType="CALL_MERGE" tooltip="Import CSV file" tooltipPosition="LEFT"/>
+                            <m:MaterialButton ui:field="ExportToXML" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export to XML" tooltipPosition="LEFT"/>
+                            <m:MaterialButton ui:field="ExportToPDF" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export to PDF" tooltipPosition="LEFT"/>
+                            <m:MaterialButton ui:field="ExportToCSV" type="FLOATING" waves="LIGHT" iconType="INSERT_DRIVE_FILE" tooltip="Export to CSV" tooltipPosition="LEFT"/>
+                        </m:MaterialFABList>
+                    </m:MaterialFAB>
+                </m:MaterialRow>
+
+                <!-- Rui Ribeiro[1150344] : Core03.2 Filter Range of Cells -->
+                <m:MaterialRow marginTop="20">
+                    <m:MaterialCollapsible>
+                        <m:MaterialCollapsibleItem>
+                            <m:MaterialCollapsibleHeader>
+                                <m:MaterialLink text="Filter" iconType="FILTER_LIST" iconPosition="LEFT" waves="DEFAULT" />
+                            </m:MaterialCollapsibleHeader>
+                            <m:MaterialCollapsibleBody>
+                                <m:MaterialRow>
+                                    <m:MaterialTextBox ui:field="filterStartCell" label="Start Cell" iconType="VIEW_MODULE" grid="s4"/>
+                                    <m:MaterialTextBox ui:field="filterEndCell" label="End Cell" iconType="VIEW_MODULE" grid="s4"/>
+                                    <m:MaterialTextBox ui:field="filterColumn" label="Column" iconType="VIEW_COLUMN" grid="s4"/>
+                                </m:MaterialRow>
+                                <m:MaterialTextBox ui:field="filterFormula" iconType="FUNCTIONS" placeholder="=IF(_filter&lt;10;&quot;true&quot;;&quot;false&quot;)" label="Please fill the above boxes and use '_filter' to represent the range of cells in the formula:" active="true" />
+                                <m:MaterialButton ui:field="filterApply" text="Apply Filter" iconType="DONE" backgroundColor="BLUE" waves="DEFAULT" margin="8"/>
+                                <m:MaterialButton ui:field="filterClear" text="Clear FIlter" iconType="CLEAR" backgroundColor="BLUE" waves="DEFAULT" margin="8"/>
+                            </m:MaterialCollapsibleBody>
+                        </m:MaterialCollapsibleItem>
+                    </m:MaterialCollapsible>
+                </m:MaterialRow>
+                <!-- ENDOF Rui Ribeiro[1150344] : Core03.2 Filter Range of Cells -->
+            
+            </m:MaterialRow>
+            <c:MaterialComboBox ui:field="material_list_extension" width="20%" label="Select extension"/>
+            <m:MaterialButton ui:field="activate" iconType="SAVE" iconColor="BLUE_LIGHTEN_1" waves="DEFAULT" circle="false" margin="20" grid="s1" iconPosition="LEFT"/>
+
+            <m:MaterialRow marginTop="60">
+                <!-- <m:table.MaterialInfiniteDataTable shadow="1" -->
+                <!-- ui:field="table" -->
+                <!-- height="calc(100vh - 131px)" -->
+                <!-- useLoadOverlay="false" -->
+                <!-- useStickyHeader="true" -->
+                <!-- useCategories="true" -->
+                <!-- selectionType="MULTIPLE"/> -->
+                <m:MaterialPanel>
+                    <m:MaterialIcon ui:field="saveButton" iconType="SAVE" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="LEFT"/>
+                    <m:MaterialIcon ui:field="menuAddIcon" iconType="ADD" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="LEFT"/>
+                    <m:MaterialIcon ui:field="menuRemoveIcon" iconType="REMOVE" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="LEFT"/>
+                    <m:MaterialIcon ui:field="selectSpreadIcon" iconType="ADD" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="LEFT"/>
+                    <m:MaterialIcon ui:field="editButtonInfo" iconType="EDIT" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="LEFT"/>
+                    <m:MaterialIcon ui:field="refreshButton" iconType="REFRESH" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="RIGHT"/>
+                    <m:MaterialIcon ui:field="sortButton" iconType="SORT" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="RIGHT"/>
+                    <m:MaterialIcon ui:field="secondtButton" iconType="EXTENSION" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="RIGHT"/>
+                    <m:MaterialIcon ui:field="searchNReplace_btn" iconType="COMPARE_ARROWS" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="RIGHT"/>
+                    <m:MaterialIcon ui:field="globalSearchAndReplace" iconType="SATELLITE" iconColor="BLUE_LIGHTEN_1" waves="GREEN" circle="false" margin="20" grid="s1" iconPosition="RIGHT"/>
+                </m:MaterialPanel>
+
+
+                <m:table.MaterialDataTable shadow="1"
+                                           m:id="customTable" ui:field="customTable" height="calc(100vh - 131px)"
+                                           useLoadOverlay="false" useStickyHeader="true" useCategories="false"
+                                           useRowExpansion="false" selectionType="NONE"
+                />
+
+                <!--  conditional format window  (@author Beatriz Ferreira <1160701@isep.ipp.pt>) -->
+                <ma:window.MaterialWindow ui:field="windowFormat" title="Format Condicional Cell" toolbarColor="BLUE_DARKEN_2">
+                    <m:MaterialRow marginBottom="0" margin="0" padding="20" layoutPosition="RELATIVE" depth="1">
+                        <m:MaterialLabel text="StyleExtensions" textColor="BLACK" fontSize="1.5em" fontWeight="BOLD" grid="l6 m6 s3"/>
+                    </m:MaterialRow>
+                    <m:MaterialRow shadow="1">
+                        <m:MaterialColumn grid="l6 m12 s12">
+                            <m:MaterialTab indicatorColor="WHITE" width="50%">
+                                <m:MaterialTabItem waves="LIGHT">
+                                    <m:MaterialLink text="Background" href="#color" textColor="BLACK"/>
+                                </m:MaterialTabItem>
+                                <m:MaterialTabItem waves="LIGHT">
+                                    <m:MaterialLink text="Border" href="#border" textColor="BLACK"/>
+                                </m:MaterialTabItem>
+                                <m:MaterialTabItem waves="LIGHT">
+                                    <m:MaterialLink text="Text Color" href="#text" textColor="BLACK"/>
+                                </m:MaterialTabItem>
+                            </m:MaterialTab>
+                        </m:MaterialColumn>
+                    </m:MaterialRow>
+
+                    <m:MaterialPanel m:id="color" padding="32" height="300px" textAlign="CENTER" overflow="AUTO">
+                        <m:MaterialLabel text="Choose the condition:" float="LEFT" />
+                        <c:MaterialComboBox  ui:field="conditional"/>
+                        <m:MaterialTextBox ui:field="numberConditional" label="Number:" marginTop="50"/>
+
+                        <m:MaterialRow>
+                            <m:MaterialLabel textColor="GREY" text="__________________________________________" />
+                        </m:MaterialRow>
+
+
+                        <m:MaterialRow>
+                            <m:MaterialLabel textColor="BLACK" text="FORMAT WITH A EXPRESSION" />
+                        </m:MaterialRow>
+
+                        <m:MaterialRow>
+                            <m:MaterialLabel textColor="GREY" text="__________________________________________" />
+                        </m:MaterialRow>
+
+
+
+                        <m:MaterialRow>
+                            <m:MaterialTextBox ui:field="cellFormat2" label="Format Filter by Expression" />
+                        </m:MaterialRow>
+
+                        <m:MaterialRow>
+
+                            <m:MaterialLabel text="Insert a filter to pick the range. Leave blank for a unique cell." float="LEFT" textColor="GREY"/>
+                        </m:MaterialRow>
+
+
+
+                        <m:MaterialLabel text="Choose color to true value:" float="LEFT" marginTop= "70"/>
+                        <c:MaterialComboBox   ui:field="listColors" />
+                        <m:MaterialLabel text="Choose color to false value:" float="LEFT" />
+                        <c:MaterialComboBox   ui:field="listColors2"/>
+                        <m:MaterialButton ui:field="confirmConditional" text="Confirm" waves="DEFAULT"  backgroundColor="BLUE_DARKEN_2" textColor="WHITE"   marginTop="100"  float="RIGHT"/>
+                    </m:MaterialPanel>
+                    <m:MaterialPanel m:id="border" padding="32" height="300px" textAlign="CENTER" overflow="AUTO">
+                        <m:MaterialLabel text="Choose the condition:" float="LEFT" />
+                        <c:MaterialComboBox  ui:field="conditional2"/>
+                        <m:MaterialTextBox ui:field="numberConditional2" label="Number:" marginTop="50"/>
+
+                        <m:MaterialLabel text="Choose style of the border to true value:" float="LEFT" marginTop= "70"/>
+                        <c:MaterialComboBox   ui:field="listBorder" />
+                        <m:MaterialLabel text="Choose style of the border to false value:" float="LEFT" />
+                        <c:MaterialComboBox   ui:field="listBorder2"/>
+                        <m:MaterialButton ui:field="confirmConditional2" text="Confirm" waves="DEFAULT"  backgroundColor="BLUE_DARKEN_2" textColor="WHITE"   marginTop="100"  float="RIGHT"/>
+                    </m:MaterialPanel>
+
+                    <m:MaterialPanel m:id="text" padding="32" height="300px" textAlign="CENTER" overflow="AUTO">
+                        <m:MaterialLabel text="Choose the condition:" float="LEFT" />
+                        <c:MaterialComboBox  ui:field="conditional3"/>
+                        <m:MaterialTextBox ui:field="numberConditional3" label="Number:" marginTop="50"/>
+                        <m:MaterialLabel text="Choose the color of the text to true value:" float="LEFT" marginTop= "70"/>
+                        <c:MaterialComboBox   ui:field="listColors3" />
+                        <m:MaterialLabel text="Choose the color of the text to false value:" float="LEFT" />
+                        <c:MaterialComboBox   ui:field="listColors4"/>
+                        <m:MaterialButton ui:field="confirmConditional3" text="Confirm" waves="DEFAULT"  backgroundColor="BLUE_DARKEN_2" textColor="WHITE"   marginTop="100"  float="RIGHT"/>
+
+                    </m:MaterialPanel>
+
+                </ma:window.MaterialWindow>
+
+
+
+                <ma:popupmenu.MaterialPopupMenu
+                    ui:field="popupMenu">
+                    <m:MaterialLink display="BLOCK" text="Copy" iconType="CONTENT_COPY"
+                                    textColor="BLACK" />
+                    <m:MaterialLink display="BLOCK" text="Paste"
+                                    iconType="CONTENT_PASTE" textColor="BLACK" />
+                    <m:MaterialLink display="BLOCK" text="Rename"
+                                    iconType="EDIT" textColor="BLACK" />
+                    <m:MaterialLink ui:field="conditionalFormat" display="BLOCK" text="Conditional Format"
+                                    iconType="EDIT" textColor="BLACK" />
+                    <m:MaterialLink ui:field="removeConditionalFormat" display="BLOCK" text="Remove Conditional Format"
+                                    iconType="REMOVE" textColor="BLACK" />
+                    <m:MaterialLink ui:field="macroButton" display="BLOCK" text="Macros"  iconType="EDIT" textColor="BLACK" />
+                    <m:MaterialLink ui:field="setImageButton" display="BLOCK" text="Set Image"  iconType="IMAGE" textColor="BLACK" />
+                    <m:MaterialLink ui:field="removeImageButton" display="BLOCK" text="Remove Image"  iconType="REMOVE" textColor="BLACK" />
+                    <m:MaterialLink ui:field="commentButton" display="BLOCK" text="Comment"  iconType="EDIT" textColor="BLACK" />
+                    <m:MaterialLink ui:field="removeCommentButton" display="BLOCK" text="Comment"  iconType="REMOVE" textColor="BLACK" />
+
+                    <m:MaterialLink ui:field="openComment" display="BLOCK" text="Open"  iconType="REMOVE" textColor="BLACK" />
+
+
+                    <!-- Second level -->
+                    <m:MaterialLink activates="moveTo" display="BLOCK"
+                                    text="Move To ..." iconType="MOVE_TO_INBOX" textColor="BLACK">
+                        <m:MaterialDropDown activator="moveTo" hover="true"
+                                            belowOrigin="true">
+                            <m:MaterialLink display="BLOCK" text="Private"
+                                            iconType="CONTENT_COPY" textColor="BLACK" />
+                            <m:MaterialLink display="BLOCK" text="Public"
+                                            iconType="CONTENT_PASTE" textColor="BLACK" />
+                            <m:MaterialLink display="BLOCK" text="Shared"
+                                            iconType="EDIT" textColor="BLACK" />
+
+                            <!-- Third level -->
+                            <m:MaterialLink activates="others" display="BLOCK"
+                                            text="Others" iconType="DEVICES_OTHER" textColor="BLACK">
+                                <m:MaterialDropDown activator="others" hover="true"
+                                                    belowOrigin="true">
+                                    <m:MaterialLink display="BLOCK" iconColor="PURPLE"
+                                                    text="Phone" iconType="PHONE" textColor="BLACK" />
+                                    <m:MaterialLink display="BLOCK" iconColor="GREEN"
+                                                    text="Tablet" iconType="TABLET" textColor="BLACK" />
+                                    <m:MaterialLink display="BLOCK" iconColor="BLUE"
+                                                    text="Laptop" iconType="LAPTOP" textColor="BLACK" />
+                                </m:MaterialDropDown>
+                            </m:MaterialLink>
+
+                        </m:MaterialDropDown>
+                    </m:MaterialLink>
+                </ma:popupmenu.MaterialPopupMenu>
+
+            </m:MaterialRow>
+        </g:HTMLPanel>
+
+
+        <!-- Material Window to use Extension Manager -->
+
+        <ma:window.MaterialWindow ui:field="window" title="Extensions Manager" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Negative Numbers Color? " marginTop="14"></m:MaterialLabel>
+
+                <m:MaterialRadioButton ui:field="radioValue" name="radio_color" text="Red" />
+                <m:MaterialRadioButton ui:field="radioValue1" name="radio_color" text="Yellow" />
+                <m:MaterialRadioButton ui:field="radioValue2" name="radio_color" text="Green" />
+                <m:MaterialRadioButton ui:field="radioValue3" name="radio_color" text="Brown" enabled="false" />
+
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowRange" title="Extensions Manager: Conditional Formating" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialRow>
+                    <m:MaterialTextBox ui:field="cellFormat" label="Range Filter" />
+                </m:MaterialRow>
+                <m:MaterialRow>
+                    <m:MaterialLabel text="Insert a filter to pick the range. Leave blank for a unique cell." float="LEFT" textColor="GREY"/>
+
+
+                </m:MaterialRow>
+
+
+                <m:MaterialRow>
+
+                    <m:MaterialLabel textColor="GREY" text="_____________________________________________________________________________________________" />
+
+                </m:MaterialRow>
+
+                <m:MaterialRow>
+
+                    <m:MaterialLabel textColor="BLACK" text="INSERT A RANGE:" float="LEFT"/>
+
+                </m:MaterialRow>
+
+                <m:MaterialRow>
+
+
+                    <m:MaterialTextBox ui:field="filterStartCellRange" label="Start Cell" iconType="VIEW_MODULE" grid="s4"/>
+                    <m:MaterialTextBox ui:field="filterEndCellRange" label="End Cell" iconType="VIEW_MODULE" grid="s4"/>
+
+
+                </m:MaterialRow>
+
+                <m:MaterialRow>
+
+                    <m:MaterialLabel textColor="GREY" text="Insert something like A1" />
+
+                </m:MaterialRow>
+
+
+                <m:MaterialRow>
+
+                    <m:MaterialButton ui:field="clearRange" iconType="DELETE" iconColor="YELLOW" circle="true" backgroundColor="RED"  float="RIGHT" grid="s2"/>
+
+                    <m:MaterialButton ui:field="startConditional" iconType="CHECK_CIRCLE" iconColor="YELLOW" circle="true" backgroundColor="GREEN"  float="RIGHT" grid="s2"/>
+
+
+
+                </m:MaterialRow>
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+
+
+        <ma:window.MaterialWindow ui:field="macroWindow2"  height="600px" width="480px">
+
+            <m:MaterialPanel padding="32" textAlign="CENTER">
+
+
+                <m:MaterialButton ui:field="CreateMacro" text="Create Macro" textColor="WHITE" backgroundColor="BLACK"/>
+                <m:MaterialButton ui:field="EditMacro" text="Edit or execute Macro" textColor="WHITE" backgroundColor="BLACK"/>
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+        <!-- *Material Window for Macro usage -->
+        
+        <!--GLOBAL SEARCH AND REPLACE--> 
+        <ma:window.MaterialWindow padding="32" ui:field="globalSearchAndReplaceWindow" title="Global Search And Replace" width="45%" height="AUTO">
+                
+            <m:MaterialTextBox ui:field="globalRegExpressionTextBox1" label="SEARCH QUERY" placeholder="(Rquired)"/>
+            <m:MaterialTextBox ui:field="globalRegExpressionTextBox2" label="REPLACE VALUE" placeholder="(Optional)"/>
+            <m:MaterialTextBox ui:field="globalRegExpressionTextBox3" label="SPECIFY WORKBOOK QUERY" placeholder="(Optional)"/>
+            
+            <m:MaterialButton ui:field="globalStartSearchAndReplace" text="SEARCH" iconType="SCANNER" iconPosition="RIGHT" enabled="false" float="RIGHT" marginTop="60"/>    
+            <m:MaterialListBox ui:field="globalFirstOptions" placeholder="FILTER: TYPED CELL" width="25%" grid="s1" marginTop="50">
+                <m.html:Option text="UNDEFINED"/>
+                <m.html:Option text="NUMERIC"/>
+                <m.html:Option text="TEXT"/>
+                <m.html:Option text="BOOLEAN"/>
+                <m.html:Option text="DATE"/>
+                <m.html:Option text="MATRIX"/>
+            </m:MaterialListBox>
+      
+        </ma:window.MaterialWindow>
+        
+        <!-- WINDOW SNR -->
+        <ma:window.MaterialWindow ui:field="searchNReplace_window" title="Search And Replace" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="500px">
+
+                <m:MaterialPanel padding="32">
+                    <m:MaterialRow>
+                        <m:MaterialTextBox ui:field="regExpressionTextBox2" label="Search for (REGEX)" />
+                        <m:MaterialTextBox ui:field="regExpressionTextBox3" label="Replace by" />
+                        <m:MaterialCheckBox ui:field="cbYes" text="Apply changes to all" value="true"  grid="s3" />
+
+                        <m:MaterialButton ui:field="startSearchNReplace" iconType="COMPARE_ARROWS" iconColor="WHITE" circle="true" backgroundColor="BLUE"  float="RIGHT" grid="s2"/>
+                    </m:MaterialRow>
+
+                    <m:MaterialListBox placeholder="FILTER: TYPED CELL" grid="s12" ui:field="lstOptions" >
+                        <!--<m.html:Option text="NO FILTER"/>-->
+                        <m.html:Option text="UNDEFINED"/>
+                        <m.html:Option text="NUMERIC"/>
+                        <m.html:Option text="TEXT"/>
+                        <m.html:Option text="BOOLEAN"/>
+                        <m.html:Option text="DATE"/>
+                        <m.html:Option text="MATRIX"/>
+                    </m:MaterialListBox>
+
+
+                </m:MaterialPanel>
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="replace_window" title="Search And Replace" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialPanel padding="32">
+                    <m:MaterialRow>
+                        <m:MaterialLabel fontSize="2em" text="Deseja substituir:" float="LEFT"/>
+                        <m:MaterialLabel ui:field="reg1" textColor="RED" float="RIGHT" />
+                    </m:MaterialRow>
+                    <m:MaterialRow>
+                        <m:MaterialLabel fontSize="2em" text="@" float="LEFT"/>
+                        <m:MaterialLabel ui:field="reg3" textColor="YELLOW" float="RIGHT" />
+                    </m:MaterialRow>
+                    <m:MaterialRow>
+                        <m:MaterialLabel fontSize="2em" text="Por:           " float="LEFT" />
+                        <m:MaterialLabel ui:field="reg2" textColor="GREEN"  float="RIGHT" />
+                        <!--<m:MaterialTextBox ui:field="regExpressionTextBox2"/>-->
+                        <!--<m:MaterialTextBox ui:field="regExpressionTextBox2" label="Search for (REGEX)" />-->
+                        <!--<m:MaterialTextBox ui:field="regExpressionTextBox3" label="Replace by" />-->
+                        <!--<m:MaterialCheckBox ui:field="cbYes" text="Apply changes to all" value="true"  grid="s3" />-->
+                        <!--<m:MaterialButton ui:field="sendRegExpression2" iconType="COMPARE_ARROWS" iconColor="WHITE" circle="true" backgroundColor="BLUE"  float="RIGHT" grid="s2"/>-->
+                    </m:MaterialRow>
+                    <m:MaterialCheckBox ui:field="cbApply" text="Apply" value="false"  grid="s1"  />
+                    <m:MaterialCheckBox ui:field="cbDontApply" text="Dont Apply" value="false"  grid="s1"  />
+
+
+
+                </m:MaterialPanel>
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+
+
+
+
+
+
+
+
+        <ma:window.MaterialWindow ui:field="janela" title="Sort Menu" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Write down the address of the cell on the top left corner and on the bottom right corner of the area you want to sort " marginTop="5"></m:MaterialLabel>
+
+
+                <m:MaterialTextBox ui:field="firstAddress" label="First Address" />
+                <m:MaterialTextBox ui:field="secondAddress" label="Second Address" />
+
+                <m:MaterialTextBox ui:field="firstAddressColumn" label="First Address Column" />
+                <m:MaterialTextBox ui:field="firstAddressRow" label="First Address Row" />
+
+                <m:MaterialTextBox ui:field="secondAddressColumn" label="Second Address Column" />
+                <m:MaterialTextBox ui:field="secondAddressRow" label="Second Address Row" />
+
+
+                <m:MaterialLabel text="Would you like the selected cells to be sorted in an ascending or descending order? " marginTop="14"></m:MaterialLabel>
+
+                <m:MaterialRadioButton ui:field="ascendingButton" name="radio_color" text="Ascending Order" />
+                <m:MaterialRadioButton ui:field="descendingButton" name="radio_color" text="Descending Order" />
+
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <!-- Material Window for Macro usage @author 1131485@isep.ipp.pt-->
+
+        <ma:window.MaterialWindow ui:field="macroWindow"  height="800px" width="600px">
+
+            <m:MaterialPanel padding="32" textAlign="CENTER">
+
+                <m:MaterialLabel text="macro List of current Workbook: "/>
+
+                <m:MaterialListValueBox ui:field="macroList" marginTop="30" marginBottom="30"/>
+
+                <m:MaterialLabel text="Languages Avaliable : "/>
+
+                <m:MaterialListValueBox ui:field="langList" marginTop="30" marginBottom="30"/>
+
+                <m:MaterialButton ui:field="langButton" text="Save Language" textColor="WHITE" backgroundColor="BLACK"/>
+
+                <m:MaterialTextArea ui:field="macroCommands" label="Macro commands: "/>
+                <m:MaterialRow>
+                    <m:MaterialButton ui:field="executeMacro" text="Execute Macro" textColor="WHITE" backgroundColor="BLACK" marginRight="20"/>
+                    <m:MaterialButton ui:field="resetMacro" text="Reset Macro" textColor="WHITE" backgroundColor="BLACK"/>
+                    <m:MaterialSection/>
+
+                    <m:MaterialLabel text="Macro Tools" fontSize="20px"/>
+                    <m:MaterialSection/>
+                    <m:MaterialButton ui:field="viewMacros" text="View Saved Macros"/>
+                    <m:MaterialTextBox ui:field="saveMacroName" label="Macro name: "/>
+                    <m:MaterialButton ui:field="saveMacro" text="Save Macro" marginRight="20"/>
+                    <m:MaterialButton ui:field="removeMacro" text="Remove Macro"/>
+                </m:MaterialRow>
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+        <!-- *Material Window for Macro usage -->
+
+        <ma:window.MaterialWindow ui:field="windowPDF" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export To PDF" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="fileName" placeholder="Enter the file name" label="Enter the file name" active="true" grid="s11" iconType="SEARCH" />
+                <m:MaterialButton ui:field="startExportWorkbookPDF" text="Export Workbook" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+                <m:MaterialButton ui:field="startExportSpreadsheetPDF" text="Export Spreadsheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+                <m:MaterialButton ui:field="startExportPartialSpreadsheetPDF" text="Export Partial Spreadsheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowSpreadsheetPDF" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export Spreadsheet To PDF" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="SpreadsheetNumber1" placeholder="Number of the Spreadsheet" label="Enter the number of the Spreadsheet" active="true" grid="s11" iconType="SEARCH" />
+                <m:MaterialButton ui:field="ExportSpreadsheetPDF" text="Export Spreadsheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowPartialSpreadsheetPDF" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export Partial Spreadsheet To PDF" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="SpreadsheetNumber2" placeholder="Number of the Spreadsheet" label="Enter the number of the Spreadsheet" active="true" grid="s11" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="posicao1" placeholder="Enter first position" label="Enter first position" active="true" grid="s11" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="posicao2" placeholder="Enter last position" label="Enter last position" active="true" grid="s11" iconType="SEARCH" />
+
+                <m:MaterialButton ui:field="ExportPartialSpreadsheetPDF" text="Export Partial Spreadsheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowXML" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export To XML" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="fileName1" placeholder="Enter the file name" label="Enter the file name" active="true" grid="s11" iconType="SEARCH" />
+                <m:MaterialButton ui:field="startExportWorkbookXML" text="Export Workbook" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+                <m:MaterialButton ui:field="startExportSpreadsheetXML" text="Export SpreadSheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s33"/>
+                <m:MaterialButton ui:field="startExportPartOfSpreadsheetXML" text="Export Part Of SpreadSheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"  grid="s34"/>
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowWorkbook1" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export Workbook To XML" marginTop="10"></m:MaterialLabel>
+
+                <m:MaterialTextBox ui:field="changetagOne" placeholder="Enter the new tag" label="Enter the tag1" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changetagTwo" placeholder="Enter the new tag" label="Enter the tag2" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changetagThree" placeholder="Enter the new tag" label="Enter the tag3" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changetagFour" placeholder="Enter the new tag" label="Enter the tag4" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changetagFive" placeholder="Enter the new tag" label="Enter the tag5" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changetagSix" placeholder="Enter the new tag" label="Enter the tag6" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialButton ui:field="Exportx" text="Export" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+
+
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+
+        <ma:window.MaterialWindow ui:field="windowSpreadsheet1" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export Spreadsheet To XML" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="changeTag1" placeholder="Enter the new tag" label="Enter the tag1" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeTag2" placeholder="Enter the new tag" label="Enter the tag2" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeTag3" placeholder="Enter the new tag" label="Enter the tag3" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeTag4" placeholder="Enter the new tag" label="Enter the tag4" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeTag5" placeholder="Enter the new tag" label="Enter the tag5" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeTag6" placeholder="Enter the new tag" label="Enter the tag6" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeSpread2" placeholder="Enter the spreadsheet number" label="Enter the spreadsheet number" active="true" grid="s21" iconType="SEARCH" />
+
+                <m:MaterialButton ui:field="Exportm" text="Export Spreadsheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+
+
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowPart1" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export Part Of Spreadsheet To XML" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="change1tag" placeholder="Enter the new tag" label="Enter the tag1" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="change2tag" placeholder="Enter the new tag" label="Enter the tag2" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="change3tag" placeholder="Enter the new tag" label="Enter the tag3" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="change4tag" placeholder="Enter the new tag" label="Enter the tag4" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="change5tag" placeholder="Enter the new tag" label="Enter the tag5" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="change6tag" placeholder="Enter the new tag" label="Enter the tag6" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeSpread" placeholder="Enter the spreadsheet number" label="Enter the spreadsheet number" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="minL" placeholder="Enter the first row you want to save" label="Enter the first row you want to save" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="maxL" placeholder="Enter the last row you want to save" label="Enter the last row you want to save" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="minC" placeholder="Enter the first column you want to save" label="Enter the first column you want to save" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="maxC" placeholder="Enter the last column you want to save" label="Enter the last column you want to save" active="true" grid="s21" iconType="SEARCH" />
+
+
+
+
+                <m:MaterialButton ui:field="ExportL" text="Export Part of Spreadsheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+
+
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+        <!-- Search window (@author David Camelo 1161294) -->
+        <ma:window.MaterialWindow ui:field="popUpView" title="Search" height="600px" width="400px">
+            <m:MaterialPanel padding="32">
+                <m:MaterialRow>
+                    <m:MaterialLabel text="Regular expression" float="LEFT" />
+                    <m:MaterialTextBox ui:field="regExpressionTextBox" active="true" float="NONE"/>
+                    <m:MaterialButton ui:field="sendRegExpression" iconType="SEARCH" iconColor="BLUE" waves="DEFAULT" circle="true" float="RIGHT"/>
+                    <m:MaterialListBox placeholder="FILTER: TYPED CELL" grid="s12" ui:field="lstOptions2" >
+                        <!--<m.html:Option text="NO FILTER"/>-->
+                        <m.html:Option text="UNDEFINED"/>
+                        <m.html:Option text="NUMERIC"/>
+                        <m.html:Option text="TEXT"/>
+                        <m.html:Option text="BOOLEAN"/>
+                        <m.html:Option text="DATE"/>
+                        <m.html:Option text="MATRIX"/>
+                    </m:MaterialListBox>
+                </m:MaterialRow>
+                <m:MaterialTextArea ui:field="outputOfSearch" active="false"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowCSV" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export To CSV" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="CSVfileName" placeholder="Enter the file name" label="Enter the file name" active="true" grid="s11" iconType="SEARCH" />
+
+
+                <m:MaterialButton ui:field="startExportWorkbookCSV" text="Export Workbook" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+                <m:MaterialButton ui:field="startExportSpreadsheetCSV" text="Export SpreadSheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s33"/>
+                <m:MaterialButton ui:field="startExportPartOfSpreadsheetCSV" text="Export Part Of SpreadSheet" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"  grid="s34"/>
+                
+                <m:MaterialLabel ui:field="label_download" textAlign="CENTER" text="" marginBottom="40" />
+             
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowWorkbook" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export Workbook To CSV" marginTop="10"></m:MaterialLabel>
+
+                <m:MaterialTextBox ui:field="changeFieldSeparator" placeholder="Enter the field Separator" label="Enter the field Separator" active="true" grid="s21" iconType="SEARCH" />
+
+                <m:MaterialButton ui:field="Export" text="Export" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+
+
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+        <!-- End of search window -->
+
+        <ma:window.MaterialWindow ui:field="windowFunctions" title= "Search Function">
+            <m:MaterialPanel padding="32" textAlign="CENTER">
+                <m:MaterialTextBox ui:field="formulaEditBox" label="Formula Edit Box" grid="s12"/>
+                <m:MaterialListValueBox ui:field="languageListBox" placeholder="Choose your language" grid="s10"/>
+                <m:MaterialButton ui:field="selLang" waves="LIGHT" textColor="WHITE" iconType="CHECK" grid="s2"/>
+                <m:MaterialListValueBox ui:field="functionListBox" placeholder="Choose your function" grid="s12"/>
+                <m:MaterialButton ui:field="selFunction"  waves="LIGHT" textColor="WHITE" iconType="CHECK" grid="s2"/>
+                <m:MaterialListValueBox ui:field="operatorListBox" placeholder="Choose your operator" grid="s12"/>
+                <m:MaterialButton ui:field="selButton" waves="LIGHT" textColor="WHITE" iconType="CHECK" grid="s2"/>
+                <!--<m:MaterialTextBox ui:field="enterPara" placeholder="Enter parameter" label="Enter parameter" active="true" grid="s12" />
+                <m:MaterialButton ui:field="selPara" waves="LIGHT" textColor="WHITE" iconType="CHECK" grid="s2"/>
+                <m:MaterialTextBox ui:field="functionParameters" placeholder="Function Parameters" label="Function Parameters" active="true" grid="s11" />-->
+                <!--<m:MaterialSection/>
+                <m:MaterialButton ui:field="applyFunction" text="Apply" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT"/>
+                <m:MaterialSection/>
+                <m:MaterialLabel ui:field="result" textColor="GREEN"  float="RIGHT" />
+                <m:MaterialSection/>-->
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+
+        <ma:window.MaterialWindow ui:field="windowCSVExportSpreadsheet" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export Spreadsheet To CSV" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="changeFieldSeparator1" placeholder="Enter the field Separator" label="Enter the field Separator" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeSpreadsheet" placeholder="Enter the spreadsheet number" label="Enter the spreadsheet number" active="true" grid="s21" iconType="SEARCH" />
+
+                <m:MaterialButton ui:field="exportworkbookcsv_button" text="Export Workbook" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+
+
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowPart" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+
+                <m:MaterialLabel text="Export Part Of Spreadsheet To CSV" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="changeFieldSeparator2" placeholder="Enter the field Separator" label="Enter the field Separator" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="changeSpreadsheet1" placeholder="Enter the spreadsheet number" label="Enter the spreadsheet number" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="minLinhas" placeholder="Enter the first row you want to save" label="Enter the first row you want to save" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="maxLinhas" placeholder="Enter the last row you want to save" label="Enter the last row you want to save" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="minColunas" placeholder="Enter the first column you want to save" label="Enter the first column you want to save" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="maxColunas" placeholder="Enter the last column you want to save" label="Enter the last column you want to save" active="true" grid="s21" iconType="SEARCH" />
+
+
+
+
+                <m:MaterialButton ui:field="Export2" text="Export Workbook" waves="LIGHT" textColor="WHITE" iconType="PLAY_FOR_WORK" iconPosition="LEFT" grid="s32"/>
+
+
+
+            </m:MaterialPanel>
+
+        </ma:window.MaterialWindow>
+
+        <!-- Set Image David Camelo 11612984@isep.ipp.pt -->
+        <ma:window.MaterialWindow ui:field="setImageWindow" title="Upload image"  height="400px" width="480">
+
+            <m:MaterialRow>
+                <m:MaterialPanel ui:field="setImagePanel" textAlign="CENTER"/>
+            </m:MaterialRow>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="showImageWindow" title="Show image"  height="500px" width="500">
+            <m:MaterialRow>
+                <m:MaterialImage ui:field="image"/>
+            </m:MaterialRow>
+        </ma:window.MaterialWindow>
+        <!-- ====================================================================================================== -->
+        
+        
+        
+        <!-- Set Comment  1160911@isep.ipp.pt -->
+        <ma:window.MaterialWindow ui:field="insertCommentWindow" padding="32" title="Comment"  height="400px" width="480">
+
+            <m:MaterialRow>
+                <m:MaterialTextBox ui:field="comment"/>
+                <m:MaterialButton ui:field="saveComment" text="Save Comment!" textAlign="CENTER" waves="LIGHT" textColor="WHITE" iconType="ADD" iconPosition="RIGHT" grid="s32"/>
+
+            </m:MaterialRow>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="showCommentWindow" title="Show Comment"  height="500px" width="500">
+            <m:MaterialRow>
+                <m:MaterialLabel ui:field="commentLabel" textAlign="CENTER"/>
+                <m:MaterialLabel ui:field="commentLabel2" textAlign="CENTER"/>
+
+            </m:MaterialRow>
+        </ma:window.MaterialWindow>
+        <!--===-->
+        
+        <ma:window.MaterialWindow ui:field="windowAddSpreadsheet" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+                <m:MaterialLabel text="ADD SPREADSHEET" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="spreadLines" placeholder="Enter the number of lines" label="Enter the number of lines" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="spreadColumns" placeholder="Enter the number of columns" label="Enter the number of columns" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialButton ui:field="buttonAddSpread" text="Add Spreadsheet" waves="LIGHT" textColor="WHITE" iconType="ADD" iconPosition="LEFT" grid="s32"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+                
+        <ma:window.MaterialWindow ui:field="ac" >
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+                <m:MaterialLabel text="Manage color extension" marginTop="10"></m:MaterialLabel>
+                <m:MaterialSwitch value="true" marginTop="12" onLabel="Enable" offLabel="Disable" ui:field="swState" />
+                <m:MaterialLabel text="Manage image extension" marginTop="10"></m:MaterialLabel>
+                <m:MaterialSwitch value="false" marginTop="12" onLabel="Enable" offLabel="Disable" ui:field="swState4" />
+                <m:MaterialButton ui:field="swState2" text="APPLY" waves="LIGHT" textColor="WHITE" iconPosition="LEFT" grid="s32"/>
+               
+
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+
+        <ma:window.MaterialWindow ui:field="windowRemoveSpreadsheet">
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+                <m:MaterialLabel text="REMOVE WORKBOOK" marginTop="10"></m:MaterialLabel>
+                <m:MaterialButton ui:field="buttonRemoveWork" text="Remove Workbook" waves="LIGHT" textColor="WHITE" iconPosition="LEFT" grid="s32"/>
+                <m:MaterialButton ui:field="buttonCancelRemove" text="Cancel" waves="LIGHT" textColor="WHITE" iconPosition="LEFT" grid="s32"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+        
+        <ma:window.MaterialWindow ui:field="windowSelectSpreadsheet">
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+                <m:MaterialLabel text="Select Active Spreadsheet" marginTop="10"></m:MaterialLabel>
+                <m:MaterialListValueBox ui:field="indexListBox" placeholder="Choose your spreadsheet" grid="s12"/>
+                <m:MaterialButton ui:field="buttonSlectActive" text="Select spreadsheet" waves="LIGHT" textColor="WHITE" iconPosition="LEFT" grid="s32"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+        
+        <ma:window.MaterialWindow ui:field="windowEditWorkbook">
+            <m:MaterialPanel padding="32" textAlign="CENTER" height="300px">
+                <m:MaterialLabel text="Edit Workbook" marginTop="10"></m:MaterialLabel>
+                <m:MaterialTextBox ui:field="nameBox" placeholder="Enter the name of workbook" label="Enter the name of workbook" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialTextBox ui:field="descBox" placeholder="Enter the description of workbook" label="Enter the description of workbooks" active="true" grid="s21" iconType="SEARCH" />
+                <m:MaterialButton ui:field="buttonEditWorkbook" text="Edit workbook" waves="LIGHT" textColor="WHITE" iconPosition="LEFT" grid="s32"/>
+            </m:MaterialPanel>
+        </ma:window.MaterialWindow>
+        
+    </m:MaterialPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,32 @@
+@startuml workbook.png 
+skinparam monochrome true 
+skinparam packageStyle rect 
+skinparam defaultFontName FG Virgil 
+skinparam shadowing false 
+ 
+hide empty methods 
+ 
+class Workbook { 
+    -isPublic
+} 
+class WorkbookDescription { 
+    -name 
+    -description
+} 
+class AccessList
+
+class Access{
+    -email
+    -accessType
+}
+enum AccessType {
+    READ_WRITE
+    READ_ONLY
+    VIEW_ONLY
+}
+WorkbookDescription *-- Workbook
+WorkbookDescription *-- AccessList
+AccessList o-- Access
+Access -- AccessType
+ 
+@enduml

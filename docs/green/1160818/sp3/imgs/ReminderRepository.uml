@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.persistence.ReminderRepository</OriginalElement>
+  <nodes>
+    <node x="361.0" y="655.0">pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.application.ReminderController</node>
+    <node x="183.5" y="268.0">javax.persistence.Entity</node>
+    <node x="0.0" y="123.0">eapli.framework.domain.DomainEntity</node>
+    <node x="26.0" y="743.0">eapli.framework.persistence.repositories.DeleteableRepository</node>
+    <node x="472.0" y="391.0">pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.Description</node>
+    <node x="35.5" y="279.0">eapli.framework.domain.AggregateRoot</node>
+    <node x="684.0" y="391.0">pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.ReminderName</node>
+    <node x="0.0" y="866.0">pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.persistence.ReminderRepository</node>
+    <node x="467.0" y="279.0">java.io.Serializable</node>
+    <node x="58.5" y="576.0">eapli.framework.persistence.repositories.Repository</node>
+    <node x="56.0" y="369.0">pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.Reminder</node>
+    <node x="30.5" y="0.0">eapli.framework.domain.Identifiable</node>
+    <node x="485.5" y="576.0">eapli.framework.application.Controller</node>
+    <node x="744.0" y="279.0">javax.persistence.Embeddable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.ReminderName" target="java.io.Serializable">
+      <point x="-48.5" y="-59.0" />
+      <point x="732.5" y="339.0" />
+      <point x="555.3333333333334" y="339.0" />
+      <point x="35.33333333333337" y="14.5" />
+    </edge>
+    <edge source="eapli.framework.domain.DomainEntity" target="eapli.framework.domain.Identifiable">
+      <point x="0.0" y="-47.5" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.Description" target="javax.persistence.Embeddable">
+      <point x="48.0" y="-59.0" />
+      <point x="616.0" y="349.0" />
+      <point x="772.5" y="349.0" />
+      <point x="-28.5" y="14.5" />
+    </edge>
+    <edge source="eapli.framework.persistence.repositories.DeleteableRepository" target="eapli.framework.persistence.repositories.Repository">
+      <point x="0.0" y="-36.5" />
+      <point x="110.5" y="718.0" />
+      <point x="108.25" y="718.0" />
+      <point x="-49.75" y="58.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.Reminder" target="java.io.Serializable">
+      <point x="132.0" y="-81.0" />
+      <point x="386.0" y="349.0" />
+      <point x="484.6666666666667" y="349.0" />
+      <point x="-35.333333333333314" y="14.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.application.ReminderController" target="eapli.framework.application.Controller">
+      <point x="0.0" y="-58.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.persistence.ReminderRepository" target="eapli.framework.persistence.repositories.DeleteableRepository">
+      <point x="-79.0" y="-36.5" />
+      <point x="79.0" y="841.0" />
+      <point x="110.5" y="841.0" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.Reminder" target="javax.persistence.Entity">
+      <point x="0.0" y="-81.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.ReminderName" target="javax.persistence.Embeddable">
+      <point x="48.5" y="-59.0" />
+      <point x="28.5" y="14.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.Reminder" target="eapli.framework.domain.AggregateRoot">
+      <point x="-132.0" y="-81.0" />
+      <point x="122.0" y="349.0" />
+      <point x="99.5" y="349.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="eapli.framework.domain.AggregateRoot" target="eapli.framework.domain.DomainEntity">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.domain.Description" target="java.io.Serializable">
+      <point x="-48.0" y="-59.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.persistence.ReminderRepository" target="eapli.framework.persistence.repositories.Repository">
+      <point x="79.0" y="-36.5" />
+      <point x="237.0" y="841.0" />
+      <point x="205.5" y="841.0" />
+      <point x="205.5" y="718.0" />
+      <point x="207.75" y="718.0" />
+      <point x="49.75" y="58.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.07737881508079" x="439.0" y="553.9013497750375" />
+  <SelectedNodes>
+    <node>pt.isep.nsheets.server.lapr4.green.s3.core.n1160818.reminders.persistence.ReminderRepository</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+

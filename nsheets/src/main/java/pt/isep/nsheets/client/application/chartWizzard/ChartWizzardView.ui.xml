@@ -1,0 +1,98 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+             
+    <ui:import field="pt.isep.nsheets.client.place.NameTokens.chart"/>         
+    <ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources' />
+	
+    <ui:style>
+        .block{
+        display: block;
+        padding: 20px;
+        position:absolute;
+        width: 72vw;
+        }
+            
+        .panel{
+        margin-top: -40px;
+        height: 70vh;
+        }
+        
+        .card{
+        border-radius: 1rem!important;
+        }
+        
+        .btn_row{
+        margin-right: 1rem;
+        text-align: end;
+        }
+        
+        .center{
+        justify-content: center; 
+        margin: 10px auto;
+        }
+        
+        .btn{
+        border-radius: 1.5rem!important;
+        }
+        
+        .chart_content{
+        overflow-y: scroll;
+        height: 100%;
+        overflow-x: visible;
+        }
+            
+    </ui:style>	
+        
+        
+               
+    <g:HTMLPanel addStyleNames="{style.panel}">
+        
+        <m:MaterialCard ui:field="edit_card" addStyleNames="{style.block} {style.card}">
+            <m:MaterialCardTitle text="Edit Chart Info"  textColor="BLACK"/>
+                       
+            <m:MaterialRow>
+                <m:MaterialTextBox ui:field="name_textbox" label="Chart Name"/>
+            </m:MaterialRow>
+            <m:MaterialRow>
+                <m:MaterialColumn grid="s12 m6 l3">
+                    <m:MaterialLabel text="Labels are in"/>
+                </m:MaterialColumn>
+                <m:MaterialColumn grid="s6 m5 l2">
+                    <m:MaterialRadioButton ui:field="col_r_btn" name="infoType" text="Column"/>
+                </m:MaterialColumn>
+                <m:MaterialColumn grid="s6 m5 l2">
+                    <m:MaterialRadioButton ui:field="row_r_btn" name="infoType" text="Row"/>
+                </m:MaterialColumn>
+            </m:MaterialRow>
+            <m:MaterialRow>
+                <m:MaterialColumn grid="s6 m4 l2">
+                    <m:MaterialTextBox ui:field="start_textbox" label="Start Cell"/>
+                </m:MaterialColumn>
+                <m:MaterialColumn grid="s6 m4 l2">
+                    <m:MaterialTextBox ui:field="end_textbox" label="End Cell"/>
+                </m:MaterialColumn>
+            </m:MaterialRow>            
+            <m:MaterialRow addStyleNames="{style.btn_row}">
+                <m:MaterialButton ui:field="save_btn" addStyleNames="{style.btn}" text="Save" waves="GREEN" backgroundColor="WHITE" textColor="BLACK" iconType="SAVE" iconPosition="RIGHT" iconColor="GREEN"/>
+            </m:MaterialRow>
+            
+            
+            <m:MaterialAnchorButton ui:field="chart_button" type="FLOATING" iconType="INSERT_CHART" size="LARGE" waves="LIGHT" layoutPosition="ABSOLUTE" right="-20" top="150"/>
+            
+        </m:MaterialCard>
+        
+        <m:MaterialCard ui:field="chart_card" addStyleNames="{style.block} {style.card}" textAlign="CENTER">
+            <m:MaterialCardTitle ui:field="m" text="Bar Chart" textColor="BLACK"/>
+            <m:MaterialCardContent ui:field="cardContent" addStyleNames="no-padding {style.chart_content} {style.center}">
+                <m:MaterialAnchorButton ui:field="edit_button" type="FLOATING" iconType="CREATE" size="LARGE" waves="LIGHT" layoutPosition="ABSOLUTE" left="-20" top="100"/>
+            </m:MaterialCardContent>
+            <m:MaterialButton ui:field="save_chart_btn" addStyleNames="{style.center} {style.btn}" text="Save Chart" waves="GREEN" backgroundColor="WHITE" textColor="BLACK" iconType="POLL" iconPosition="RIGHT" iconColor="GREEN"/>
+        </m:MaterialCard>
+        
+	
+    </g:HTMLPanel>
+    
+    
+</ui:UiBinder>

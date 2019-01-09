@@ -1,0 +1,32 @@
+@startuml domainmodel.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+class User [[java:pt.isep.nsheets.server.lapr4.green.s1.ipc.n1160818.userAuthentication.domain.User]] {
+	-Long id
+	-Username username
+	-Password password
+	-Email email
+	-Name name
+	-String role
+	-boolean active
+	-String picURL
+    -...
+    
+    +...()
+    +void changeUsername(String username)
+	+void changeName(String name)
+	+void changePhoto(String path)
+	+boolean isActive()
+	+void changeUserStatus(boolean status)
+}
+interface "AggregateRoot<Long>" as AggregateRoot_Long_ {
+}
+AggregateRoot_Long_ <|.. User
+interface Serializable [[java:java.io.Serializable]] {
+}
+Serializable <|.. User
+@enduml

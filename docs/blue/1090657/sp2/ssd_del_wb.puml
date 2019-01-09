@@ -1,0 +1,56 @@
+@startuml  ssd_del_wb.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing true
+ 
+actor User
+boundary HomeView
+control HomePresenter
+control WorkbookService
+control WorkbookController
+control WorkbookDesignationRepository
+database Database 
+ 
+box "NSheets Client"
+participant HomeView
+participant HomePresenter 
+participant Workbook
+participant WorkbookDesignationDTO
+participant WorkbookDTO
+participant WorkbookManager
+participant WorkbookServiceAsync
+end box
+
+box "Server"
+participant WorkbookService
+participant WorkbookController
+participant WorkbookDesignationRepository
+participant WorkbookDesignation
+participant WorkbookDesignationController
+participant WorkbookDesignationDTO
+participant Workbook
+participant WorkbookDTO
+participant WorkbookServiceImpl
+end box
+ 
+box "Database"
+participant Database
+end box
+ 
+User -> HomeView : deleteWorkbook()
+HomeView -> WorkbookManager : removeWorkbook(workbook)
+HomeView -> WorkbookServiceAsync : deleteWorkbook(wbdto)
+WorkbookServiceAsync -> WorkbookServiceImpl : deleteWorkbook(wbdto)
+WorkbookServiceImpl -> WorkbookDesignationController : deleteWorkbook(wbdto)
+WorkbookDesignationController -> WorkbookDesignationRepository : wbd = getWorkbookDesignation(wbdto)
+WorkbookDesignationRepository -> Database : wbd = getWorkbookDesignation(name,description)
+WorkbookDesignationRepository --> WorkbookDesignationController : wbd
+WorkbookDesignationController -> WorkbookDesignationRepository : deleteWorkbook(wbd)
+WorkbookDesignationController --> WorkbookServiceImpl : true
+WorkbookServiceImpl --> WorkbookService : true
+WorkbookService --> WorkbookServiceAsync : true
+WorkbookServiceAsync --> HomeView : true
+HomeView --> User : show deleted
+@enduml

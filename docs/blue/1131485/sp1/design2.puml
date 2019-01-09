@@ -1,0 +1,69 @@
+@startuml  design2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary WorkbookView
+control MacroCompilerManager
+control ExpressionCompiler
+boundary MacroWindow
+control WorkbookPresenter
+control SaveMacroController
+entity MacroRepository
+
+database Database
+
+box "NSheets Client"
+participant WorkbookView
+participant MacroWindow
+participant MacroCompilerManager
+participant ExpressionCompiler
+participant WorkbookPresenter 
+
+end box
+
+box "Server"
+
+participant SaveMacroController
+participant MacroRepository
+
+end box
+
+box "Database"
+
+participant Database
+
+end box
+
+
+User -> WorkbookPresenter : onClick() / open Macro sub-menu
+WorkbookPresenter -> MacroWindow : open()
+WorkbookPresenter -> WorkbookView : showMacroWindow()
+User -> WorkbookPresenter : edits text on MacroWindow
+User -> WorkbookPresenter : onClick() / execute Macro
+WorkbookPresenter -> MacroWindow : Macro = macroList.getSelectedValue()
+WorkbookPresenter -> MacroWindow : Macro.addCommand(macroCommands.getText())
+WorkbookPresenter -> MacroCompilerManager : ExpressionCompiler = getCompiler(Macro.language().getName())
+WorkbookPresenter -> ExpressionCompiler : compile(activeCell, Macro.commands())
+ExpressionCompiler -> WorkbookPresenter : Value = expression.evaluate()
+
+alt Compilation Sucess
+
+WorkbookPresenter -> MacroWindow : showResult(Value.toString())
+WorkbookPresenter -> WorkbookView : activeCell.setContent(Value.toString())
+
+WorkbookPresenter -> SaveMacroController : saveMacro(Macro)
+SaveMacroController -> MacroRepository : save(Macro)
+MacroRepository -> Database : save
+
+else Compilation Failure
+
+WorkbookPresenter -> MacroWindow : showMessageError()
+
+end
+
+
+@enduml

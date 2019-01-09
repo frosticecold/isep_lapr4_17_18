@@ -1,0 +1,1 @@
+ mvnDebug tomcat7:run-war-only

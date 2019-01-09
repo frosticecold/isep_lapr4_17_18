@@ -1,0 +1,80 @@
+@startuml  design1.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary MenuView
+control WorkbookPresenter
+boundary GlobalSearchWindow
+boundary WorkbookView
+control GlobalSnRCntrl
+control GlobalSnRSvc
+control GlobalSnRSvcImpl
+control ipc06Controller
+control Pattern
+entity WorkbookDesRepo
+entity UserRepository
+entity Users
+database Database
+
+box "NSheets Client"
+participant MenuView
+participant WorkbookPresenter
+participant WorkbookView
+participant GlobalSearchWindow
+end box
+
+box "Shared"
+participant GlobalSnRSvc
+participant GlobalSnRSvcImpl
+end box
+
+box "Server"
+participant GlobalSnRCntrl
+participant ipc06Controller
+participant WorkbookDesRepo
+participant UserRepository
+participant Users
+control Pattern
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> MenuView : open workbook sub-menu
+MenuView --> WorkbookPresenter : open()
+WorkbookPresenter --> WorkbookView : openWindow()
+WorkbookView --> GlobalSearchWindow : openWindow()
+User -> GlobalSearchWindow : inserts required data
+User -> GlobalSearchWindow : onClick() / specificSearchAndReplace
+GlobalSearchWindow -> GlobalSnRSvc : showOutputOfWork\nbookSearchAndReplace()
+GlobalSnRSvc -> GlobalSnRSvcImpl : showOutputOfWork\nbookSearchAndReplace()
+GlobalSnRSvcImpl -> GlobalSnRCntrl : globalSearch()
+GlobalSnRCntrl -> ipc06Controller : getWorkbooks\nFromCurrentUser()
+ipc06Controller -> UserRepository : findUserByUsername()
+UserRepository -> Database : findUserByUsername()
+ipc06Controller -> WorkbookDesRepo : listPublicWorkbookDescriptions()
+ipc06Controller -> Users : workbooksFromUser()
+ipc06Controller -> WorkbookDesRepo :listPrivateWorkbookDescriptions()
+GlobalSnRCntrl -> Pattern : match(workbookExpression)
+loop
+GlobalSnRCntrl -> Pattern : match()
+end loop
+
+alt Compilation Success
+GlobalSnRCntrl -> WorkbookDesRepo : save()
+WorkbookDesRepo -> Database : save()
+GlobalSnRCntrl --> WorkbookPresenter : display onSuccess
+WorkbookPresenter --> User : Uc success scenario
+else Compilation Failure
+GlobalSnRCntrl -> WorkbookDesRepo : save()
+WorkbookDesRepo -> Database : save()
+GlobalSnRCntrl --> WorkbookPresenter : display onFailure
+WorkbookPresenter --> User : Uc failure scenario
+end
+
+@enduml

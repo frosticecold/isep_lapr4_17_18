@@ -1,0 +1,18 @@
+@startuml  analysis.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : start use case
+Browser ->> User : list calendars
+User ->> Browser : select one calendar for edit
+Browser ->> User : edit calendar
+User ->> Browser :confirm
+Browser ->> User : close window
+
+
+@enduml

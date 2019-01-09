@@ -1,0 +1,55 @@
+@startuml  ssd_add_spd.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing true
+ 
+actor User
+boundary WorkbookView
+control WorkbookPresenter
+control WorkbookService
+control WorkbookController
+control WorkbookDesignationRepository
+database Database 
+ 
+box "NSheets Client"
+participant WorkbookView
+participant WorkbookPresenter 
+participant Workbook
+participant WorkbookDesignationDTO
+participant WorkbookDTO
+participant WorkbookManager
+participant WorkbookServiceAsync
+end box
+
+box "Server"
+participant WorkbookService
+participant WorkbookController
+participant WorkbookDesignationRepository
+participant WorkbookDesignation
+participant WorkbookDesignationController
+participant WorkbookDesignationDTO
+participant Workbook
+participant WorkbookDTO
+participant WorkbookServiceImpl
+end box
+ 
+box "Database"
+participant Database
+end box
+ 
+User -> WorkbookView : addSpreadsheet()
+WorkbookView -> WorkbookManager : addSpreadsheetToCurrentWorkbook(number)
+WorkbookManager -> Workbook : addSpreadsheet(number)
+WorkbookManager -> WorkbookManager : wbdto = new WorkbookDesignationDTO(dto,workbook)
+WorkbookManager -> WorkbookServiceAsync : updateWorkbook(wbdto)
+WorkbookServiceAsync -> WorkbookServiceImpl : updateWorkbook(wbdto)
+WorkbookServiceImpl -> WorkbookDesignationController : updateWorkbook(wbdto)
+WorkbookDesignationController -> WorkbookDesignationRepository : wbd = getWorkbookDesignation(wbdto)
+WorkbookDesignationRepository -> Database : wbd = getWorkbookDesignation(name,description)
+WorkbookDesignationRepository --> WorkbookDesignationController : wbd
+WorkbookDesignationController -> WorkbookDesignation : wbd.fromDto(wbdto)
+WorkbookDesignation -> Workbook : workbook = new Workbook(workbookdto)
+WorkbookDesignationController -> WorkbookDesignationRepository : saveWorkbookDesignation(wbd)
+@enduml

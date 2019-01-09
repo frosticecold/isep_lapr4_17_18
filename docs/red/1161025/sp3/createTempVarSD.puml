@@ -1,0 +1,32 @@
+@startuml  design.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary FormulaCompiler
+Control Formula
+Control Expression
+Control TemporaryVariableImp
+Control FormulaEvalVisitor
+Control TemporaryVariableOperation
+
+box "NSheets Shared"
+participant FormulaCompiler
+participant Formula
+participant Expression
+participant FormulaEvalVisitor
+participant TemporaryVariableOperation
+participant TemporaryVariableImp
+end box
+
+User -> FormulaCompiler : confirms formula
+FormulaCompiler -> Formula: new Formula()
+Formula -> Expression: evaluate()
+Expression -> FormulaEvalVisitor: visitAttribution()
+FormulaEvalVisitor -> TemporaryVariableOperation: create()
+TemporaryVariableOperation -> TemporaryVariableImp: new TemporaryVariableImp()
+
+@enduml

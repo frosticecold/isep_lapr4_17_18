@@ -1,0 +1,22 @@
+@startuml  analysis2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : remove event
+
+Browser ->> Server : removeEvent()
+
+database Database
+
+Server -> Database : remove
+
+Server -->> Browser : return
+
+Browser -> Browser : display
+
+@enduml

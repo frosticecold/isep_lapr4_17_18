@@ -1,0 +1,45 @@
+@startuml  design2.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary FormView
+control FormPresenter
+control AddFormController
+control FormService
+entity FormRepository
+entity Form
+database Database 
+
+box "NSheets Client"
+participant FormView
+participant FormPresenter 
+end box
+ 
+box "Server"
+participant FormService
+participant AddFormController
+participant FormService
+participant Form
+participant FormRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> FormView : click new workbook
+FormView -> FormPresenter : onClick()
+FormPresenter ->> FormService : newForm(DTO)
+FormService -> AddFormController : addForm(DTO)
+create Form
+AddFormController -> Form : f = new
+FormService -> FormRepository : save(f)
+FormRepository -> Database : write
+FormService ->> FormPresenter : onSuccess(DTO) 
+FormPresenter -> FormView : setContents()
+
+@enduml

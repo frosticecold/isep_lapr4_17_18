@@ -1,0 +1,10 @@
+/**
+ * @startuml
+ * User -> Application : selects the calendar feature
+ * Application -> User : shows the calendar UI
+ * User -> Application : selects the wanted feature
+ * Application -> User : shows the respective UI
+ * User -> Application : insets information
+ * Application -> User : does the intended action
+ * @enduml
+ */

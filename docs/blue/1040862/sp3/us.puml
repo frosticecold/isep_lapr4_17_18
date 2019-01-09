@@ -1,0 +1,13 @@
+@startuml  us.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+User -> (US4: Specific search and replace)
+User -> (US3: Specific search)
+User -> (US2: Global search and replace)
+User -> (US1: Global search)
+
+@enduml

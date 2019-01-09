@@ -1,0 +1,33 @@
+@startuml  design1.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary WorkbookView
+control WorkbookPresenter
+control ExportCLSService
+control ExportCLSServiceImpl
+control ExportCLSController
+
+box "NSheets Client"
+participant WorkbookView
+participant WorkbookPresenter 
+end box
+
+box "Server"
+participant ExportCLSServiceImpl
+participant ExportCLSController
+participant ExportCLSService
+end box
+
+User -> WorkbookPresenter : onClick() / On button click
+WorkbookPresenter ->> ExportCLSServiceImpl: exportWorkbookToPDF(Workbook wb, String filename)
+ExportCLSServiceImpl -> ExportCLSController : exportWorkbookToPDF(Workbook wb, String filename)
+ExportCLSController -> ExportCLSService : exportWorkbookToPDF(Workbook wb, String filename)
+ExportCLSController ->> WorkbookPresenter : onSuccess() 
+WorkbookPresenter -> WorkbookView : Informs success and presents a download link to the file
+
+@enduml

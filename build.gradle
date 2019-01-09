@@ -1,0 +1,10 @@
+defaultTasks 'renderPlantUml'
+
+task renderPlantUml(type: RenderPlantUmlTask) {
+      inputDir = file("${projectDir}/docs")
+      outputDir = file("${projectDir}/docs")
+
+      inputFiles = fileTree(dir: "${projectDir}/docs", include: '**/*.puml')
+      outputFiles = fileTree(dir: "${projectDir}/docs", include: '**/*.png')      
+}
+

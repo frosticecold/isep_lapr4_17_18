@@ -1,0 +1,8 @@
+@startuml
+User -> Browser : navigate to page (workbook) and chose the export to xml option
+User -> Browser : select the wanted options
+User -> Browser : confirm options
+Browser -> Controller : send the download file
+Controller -> Browser : return
+
+@enduml

@@ -1,0 +1,42 @@
+@startuml  listEventsSD.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary EventCalendarView
+control EventCalendarPresenter
+control EventServices
+control ListEventController
+control EventService
+entity EventRepository
+database Database
+
+box "NSheets Client"
+participant EventCalendarView
+participant EventCalendarPresenter
+end box
+
+box "Server"
+participant EventServices
+participant ListEventController
+participant EventService
+participant EventRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> EventCalendarPresenter : onReveal() / navigate to page
+EventCalendarPresenter ->> EventServices : getEvents()
+EventServices -> ListEventController : getEvents()
+ListEventController -> EventService : listAllEvents()
+EventService -> EventRepository : findAll()
+EventRepository -> Database : fetch
+EventServices ->> EventCalendarPresenter : onSuccess()
+EventCalendarPresenter ->EventCalendarView : setContents()
+
+@enduml

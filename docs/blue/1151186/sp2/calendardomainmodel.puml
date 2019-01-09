@@ -1,0 +1,9 @@
+@startuml
+class EventCalendarService [[java:pt.isep.nsheets.server.lapr4.blue.s2.core.n1151186.agenda.application.EventCalendarService]] {
+	+EventCalendar createEventCalendar(EventCalendarDTO dto)
+	+Iterable<EventCalendar> listAllEvents()
+	+Boolean removeEventCalendar(String title, String description)
+	+EventCalendar editEventCalendar(EventCalendarDTO eventCalendarDTO, String title, String description)
+	+EventCalendar addEvent(EventCalendarDTO eventCalendarDTO, String type, EventDTO event)
+}
+@enduml

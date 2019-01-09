@@ -1,0 +1,28 @@
+@startuml functions.png
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+hide empty methods
+interface Expression {
+    +evaluate()
+    +accept(visitor)
+}
+
+class IfExpr extends Expression{
+    -toEvaluate
+    -ifTrue
+    -ifFalse
+}
+class ForExpr extends Expression{
+    -start
+    -end
+    -step
+    -arguments
+}
+class MultipleExpressions extends Expression {
+    -Expression[] expressions
+}
+
+@enduml

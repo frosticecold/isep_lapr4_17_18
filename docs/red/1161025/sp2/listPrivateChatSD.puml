@@ -1,0 +1,42 @@
+@startuml  listEventsSD.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary PrivateChatView
+control PrivateChatPresenter
+control PrivateChatServices
+control ListPrivateChatController
+control PrivateChatService
+entity PrivateChatRepository
+database Database
+
+box "NSheets Client"
+participant PrivateChatView
+participant PrivateChatPresenter
+end box
+
+box "Server"
+participant PrivateChatServices
+participant ListPrivateChatController
+participant PrivateChatService
+participant PrivateChatRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> PrivateChatPresenter : onReveal() / navigate to page
+PrivateChatPresenter ->> PrivateChatServices : getPrivateChats(username)
+PrivateChatServices -> ListPrivateChatController : getPrivateChats(username)
+ListPrivateChatController -> PrivateChatService : listPrivateChats(username)
+PrivateChatService -> PrivateChatRepository : findPrivateChats(username)
+PrivateChatRepository -> Database : fetch
+PrivateChatServices ->> PrivateChatPresenter : onSuccess()
+PrivateChatPresenter ->PrivateChatView : setContents()
+
+@enduml

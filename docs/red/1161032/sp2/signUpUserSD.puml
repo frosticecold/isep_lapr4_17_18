@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+actor User
+participant SignUpView
+participant SignUpPresenter
+participant SignUpController
+participant SignUpService
+participant SignUpServiceAsync
+participant SignUpServiceImpl
+
+
+User -> MenuView : Choose the option to register an account
+MenuView -> SignUpView :openSignUpUI
+
+box "NSheets Client"
+participant SignUpView
+participant SignUpPresenter
+
+end box
+
+SignUpView--> User : Ask for information
+User -> SignUpView : Input information (username, email, password, name, imageURL)
+box "Shared"
+participant SignUpServiceAsync
+participant SignUpService
+end box
+
+box "Server"
+participant SignUpServiceImpl
+participant SignUpController
+end box
+
+SignUpView -> SignUpPresenter : onSignUp(info)
+SignUpPresenter ->> SignUpServiceAsync : createUser(info, callback)
+SignUpServiceAsync ->> SignUpService :  createUser(info)
+SignUpService ->> SignUpServiceImpl : createUser(info)
+SignUpServiceImpl -> SignUpController : createUser(info)
+SignUpController -> UserRepository : findByUsername()
+SignUpController -> UserRepository : findByEmail()
+UserRepository -> UserRepository : save(info)
+SignUpPresenter --> User : Informs if successfull 
+
+
+
+
+
+
+
+@enduml

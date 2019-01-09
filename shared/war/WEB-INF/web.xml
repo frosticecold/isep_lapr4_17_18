@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <servlet/>
+    <servlet>
+        <servlet-name>pt.isep.nsheets.shared SessionService</servlet-name>
+        <servlet-class>pt.isep.nsheets.server.lapr4.blue.s3.ipc.n1131485.services.SessionServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>pt.isep.nsheets.shared SesionService</servlet-name>
+        <url-pattern>/shared/SessionServices</url-pattern>
+    </servlet-mapping>
+</web-app>

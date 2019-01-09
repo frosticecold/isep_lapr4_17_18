@@ -1,0 +1,43 @@
+@startuml design1
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary WorkbookView
+boundary WorkbookPresenter
+
+box "NSheets Client"
+participant WorkbookView
+participant WorkbookPresenter
+end box
+
+box "NSheets Server"
+participant ConditionalServiceImpl
+participant ConditionalCellFormattingController
+end box
+
+
+
+
+User -> WorkbookView : selects conditional format option
+WorkbookView --> User : asks for range
+User -> WorkbookView : inserts range
+WorkbookView -> ConditionalServiceImpl : saves range
+WorkbookView --> User : asks for conditional expression
+User -> WorkbookView : inserts conditional expression
+
+
+WorkbookView -> WorkbookPresenter : conditionalFormattingAction()
+loop allSelectedCells
+WorkbookPresenter -> WorkbookPresenter : applyConditionToCell()
+end
+
+ConditionalServiceImpl -> ConditionalCellFormattingController : addRangeConditional()
+
+
+
+ConditionalServiceImpl -> WorkbookPresenter : onSuccess()
+@enduml

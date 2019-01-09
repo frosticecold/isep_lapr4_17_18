@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-clean install</actionName>
+            <displayName>clean install</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-tomcat</actionName>
+            <displayName>tomcat</displayName>
+            <goals>
+                <goal>tomcat7:run-war-only</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-gwt</actionName>
+            <displayName>gwt</displayName>
+            <goals>
+                <goal>gwt:run</goal>
+                <goal>-pl</goal>
+                <goal>nsheets</goal>
+            </goals>
+        </action>
+    </actions>

@@ -1,0 +1,35 @@
+@startuml  sd1.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary WorkbookView
+control ExportToPDFService
+control exportSpreasheetController
+entity ExportStrategy
+entity ExportFactory
+
+box "NSheets Client"
+participant WorkbookView
+end box
+
+box "Server"
+participant ExportToPDFService
+participant exportSpreasheetController
+participant ExportFactory
+participant ExportStrategy
+end box
+
+User -> WorkbookView : starts Spreasheet Export
+WorkbookView -> ExportToPDFService : exportSpreasheetToPDF(format,s,filename)
+ExportToPDFService -> exportSpreasheetController : exportSpreasheet(format,s,filename)
+exportSpreasheetController --> ExportFactory : instance()
+exportSpreasheetController -> ExportFactory : getStrategy(format)
+ExportFactory --> ExportStrategy : create()
+ExportFactory -> ExportStrategy : exportSpreasheet(s,filename)
+ExportStrategy -> ExportStrategy : writeSpreasheetToFileFormat()
+
+@enduml

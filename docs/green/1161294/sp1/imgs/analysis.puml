@@ -1,0 +1,18 @@
+@startuml  analysis.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : introduce regular expression
+Browser ->> Server : sendRegularExpressionForSearch()
+
+Server ->> Server : processRegularExpressionForSearch()
+
+Server ->> Browser : sendOutputOfSearch()
+Browser -> User : show output of search
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml  us.png
+skinparam monochrome true
+
+participant "User" as User
+participant "US1: Create Note" as US1
+participant "US2: List Note" as US2
+participant "US3: Edit Note" as US3
+participant "US4: Remove Note" as US4
+
+User -> US1: "Create Note"
+User -> US2: "List Note"
+User -> US3: "Edit Note"
+User -> US4: "Remove Note"
+@enduml

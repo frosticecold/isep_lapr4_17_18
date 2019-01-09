@@ -1,0 +1,65 @@
+@startuml  createEventSD.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary HomeView
+control HomePresenter
+control workbookService
+control ipCController06
+control user
+control ListWB
+control Username
+control AddWorkbookDescriptionController
+control workbookDescriptionService
+control workbookDescriptionRepository
+control userRepository
+control workbookdDescription
+database Database
+
+box "NSheets Client"
+participant HomeView
+participant HomePresenter
+end box
+
+box "Server"
+participant workbookService
+participant ipCController06
+participant user
+participant ListWB
+participant Username
+participant AddWorkbookDescriptionController
+participant workbookDescriptionService
+participant workbookdDescription
+participant workbookDescriptionRepository
+participant userRepository
+
+
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> HomeView : insert wbInfo(name,desscription)
+HomeView->HomePresenter : onClick()
+HomePresenter->workbookService :addWbDesc(wbD,isPublic,user)
+workbookService->AddWorkbookDescriptionController : addWorkbookDescription(workbookDescription, isPublic)
+AddWorkbookDescriptionController->workbookDescriptionService : addWorkbookDescription(workbookDescription,isPublic)
+workbookDescriptionService->workbookdDescription : wb=new WorkbookDescription()
+workbookDescriptionService->workbookDescriptionRepository : addWorkbookDescription(workbookDescription,isPublic)
+workbookDescriptionRepository->Database : save(wbd)
+workbookService ->ipCController06 :savePrivateUser(username,workbookDescription)
+ipCController06 ->Username : new Username(username)
+Username ->userRepository : findUserByName(username)
+userRepository-> Database :saveUser(username)
+workbookService ->ipCController06 :savePublicUser(wb)
+ipCController06 ->userRepository :findAllUsers()
+userRepository -> Database :getListUsers()
+ipCController06 -> user: user
+user -> ListWB :add(wb)
+user -> Database :saveUser
+@enduml

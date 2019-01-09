@@ -1,0 +1,24 @@
+@startuml
+top to bottom direction
+
+:Authenticated User: as User
+(Import Workbook) as (US1)
+(Import Spreadsheet) as (US2)
+(Import Partial Spreadsheet) as (US3)
+
+User --> (US1)
+User --> (US2)
+User ---> (US3)
+
+note left of (US1)
+  Imports complete workbook
+end note
+
+note left of (US2)
+  Imports one spreadsheet
+end note
+
+note right of (US3)
+  Imports a part of a spreadsheet
+end note
+@enduml

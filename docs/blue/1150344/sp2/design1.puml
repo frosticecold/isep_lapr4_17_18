@@ -1,0 +1,39 @@
+@startuml  design1.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary WorkbookView
+control WorkbookPresenter
+
+box "NSheets Client"
+participant WorkbookView
+participant WorkbookPresenter 
+end box
+
+control FilterController
+
+User -> WorkbookView : Select Filter
+WorkbookView -> WorkbookPresenter : onReveal() / navigate to page 
+WorkbookPresenter ->> WorkbookManager : getActiveWorkbook().getActiveSpreadsheet()
+WorkbookPresenter -> FilterController : isColumnValid(StartCell, EndCell, Column)
+FilterController -> FilterController : correspondingAddress(StartCell)
+FilterController -> FilterController : correspondingAddress(EndCell)
+FilterController -->> WorkbookPresenter : return
+alt validColumn
+    WorkbookPresenter -> FilterController : filter(StartCell, EndCell, Column, activeSpreadsheet, Formula, rowsToHide)
+    FilterController -> FilterController : correspondingAddress(Cell)
+    FilterController -> FilterController : filterCell(Cell, Formula)
+    alt formulaValid
+        FilterController -->> WorkbookPresenter : rowsToHide
+        WorkbookPresenter -->> WorkbookView : Disables the rows
+    else formulaNotValid
+        FilterController -->> WorkbookView : Invalid formula
+    end
+else notValidCOlumn
+    WorkbookPresenter -->> WorkbookView : Report error
+end
+@enduml

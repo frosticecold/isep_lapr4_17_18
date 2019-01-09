@@ -1,0 +1,56 @@
+@startuml  listEventsSD.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary PrivateChatView
+control PrivateChatPresenter
+control PrivateChatServices
+control SendMessageController
+control PrivateChatService
+entity PrivateChatRepository
+entity Message
+entity PrivateChat
+entity UserRepository
+database Database
+
+box "NSheets Client"
+participant PrivateChatView
+participant PrivateChatPresenter
+end box
+
+box "Server"
+participant PrivateChatServices
+participant SendMessageController
+participant PrivateChatService
+participant Message
+participant PrivateChat
+participant PrivateChatRepository
+participant UserRepository
+
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> PrivateChatView : insert message
+User -> PrivateChatView : onClick()
+PrivateChatView ->> PrivateChatServices : addMessageToChat(pchatName, DTO)
+PrivateChatServices -> SendMessageController : addMessage(pchatName, DTO)
+SendMessageController -> PrivateChatService : addMessageToChat(pchatName, DTO)
+PrivateChatService -> PrivateChatRepository : pc = findPChatByName(pchatName)
+PrivateChatRepository -> Database : fetch
+create Message
+PrivateChatService -> Message : ms = new(DTO)
+PrivateChatService -> PrivateChat : add(ms)
+PrivateChatService -> PrivateChatRepository : save(pc)
+PrivateChatRepository -> Database : write
+PrivateChatService -> Message :cDTO = toDTO()
+PrivateChatServices ->> PrivateChatPresenter : onSuccess(cDTO)
+PrivateChatPresenter ->PrivateChatView : setContents()
+
+@enduml

@@ -1,0 +1,85 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+    
+    <ui:import field="pt.isep.nsheets.client.place.NameTokens.home"/>         
+	<ui:with field='res' type='pt.isep.nsheets.client.resources.AppResources' />
+	
+	<ui:style>
+	
+	</ui:style>	
+               
+    <g:HTMLPanel>
+
+	<m:MaterialRow marginTop="60">
+    		<g:Hyperlink text="Back to home" targetHistoryToken="{home}" />
+	</m:MaterialRow>
+
+        <m:MaterialRow>
+            <m:MaterialButton ui:field="btnListContacts" text="List Contacts" waves="LIGHT" textColor="WHITE"/>
+       <m:MaterialColumn>
+                <g:HTMLPanel>
+                    <div id="listContacts">
+                        <m:MaterialTextBox ui:field="username1" placeholder="Username of the User" label="Username" iconType="MENU"/>
+                    </div>
+                </g:HTMLPanel>
+            </m:MaterialColumn>
+        </m:MaterialRow>
+        
+        <m:MaterialRow>
+            <m:MaterialButton ui:field="btnListBlockedUsers" text="List Blocked Users" waves="LIGHT" textColor="WHITE"/>            
+            <m:MaterialColumn>
+                <g:HTMLPanel>
+                    <div id="listBlockedUsers">
+                        <m:MaterialTextBox ui:field="username2" placeholder="Username of the User" label="Username" iconType="MENU"/>
+                    </div>
+                </g:HTMLPanel>
+            </m:MaterialColumn>
+        </m:MaterialRow>
+        
+        <m:MaterialRow>
+        <m:MaterialButton ui:field="btnCreateContact" text="Create Contact" waves="LIGHT" textColor="WHITE"/>
+            <m:MaterialColumn>
+                <g:HTMLPanel>
+                    <div id="createContact">
+                        <m:MaterialTextBox ui:field="email1" placeholder="Email of the User" label="Email" iconType="MENU"/>
+                    </div>
+                </g:HTMLPanel>
+            </m:MaterialColumn>
+	</m:MaterialRow>
+        
+        <m:MaterialRow>
+        <m:MaterialButton ui:field="btnBlockUser" text="Block User" waves="LIGHT" textColor="WHITE"/>
+            <m:MaterialColumn>
+                <g:HTMLPanel>
+                    <div id="createContact">
+                        <m:MaterialTextBox ui:field="email2" placeholder="Email of the User" label="Email" iconType="MENU"/>
+                    </div>
+                </g:HTMLPanel>
+            </m:MaterialColumn>
+	</m:MaterialRow>
+    </g:HTMLPanel>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ui:UiBinder>

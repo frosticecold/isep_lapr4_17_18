@@ -1,0 +1,50 @@
+@startuml  ssd_share.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing true
+ 
+actor User
+boundary HomeView
+control HomePresenter
+control WorkbookService
+database Database 
+ 
+box "NSheets Client"
+participant HomeView
+participant HomePresenter 
+participant WorkbookDesignationDTO
+participant WorkbookDTO
+participant AccessList
+participant Access
+participant WorkbookServiceAsync
+end box
+
+box "Server"
+participant WorkbookService
+participant WorkbookDesignationRepository
+participant WorkbookDesignation
+participant WorkbookServiceImpl
+participant SaveWorkbookController
+end box
+ 
+box "Database"
+participant Database
+end box
+ 
+User -> HomeView : shareWorkbookWindow.open()
+User -> HomeView : insert email and access
+HomeView -> WorkbookDesignationDTO : getAccessList()
+HomeView -> AccessList : addUserAccess(email,access)
+AccessList -> Access : create(email,accesstype)
+AccessList -> AccessList : add(access)
+HomeView -> HomeView : saveAccess()
+HomeView -> WorkbookServiceAsync : saveWorkbook(dto,callback)
+WorkbookServiceAsync -> WorkbookServiceImpl : saveWorkbook(dto)
+WorkbookServiceImpl -> SaveWorkbookController : saveWorkbook(dto)
+SaveWorkbookController -> WorkbookDesignation : WorkbookDescription(dto)
+SaveWorkbookController -> WorkbookDesignationRepository : save(wdescription)
+WorkbookDesignationRepository -> Database : save
+HomeView -> HomeView : close()
+@enduml

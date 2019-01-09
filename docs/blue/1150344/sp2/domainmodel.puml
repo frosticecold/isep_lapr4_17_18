@@ -1,0 +1,14 @@
+@startuml  domainmodel.png
+skinparam handwritten false
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+hide empty methods
+
+class FilterController << Controller >> {	
+	boolean isValidColumn(String startCellAddress, String endCellAddress, String column)
+	filter(String startCellAddress, String endCellAddress, String column, Spreadsheet spreadsheet, String formula, HashSet<Integer> rowsToHide)
+}
+
+@enduml

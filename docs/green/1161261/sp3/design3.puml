@@ -1,0 +1,49 @@
+@startuml  design3
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary CalendarView.ui
+control CalendarView
+entity WindowDeleteCalendars
+control AgendaService
+control RemoveAgendaController
+control AgendasService
+database Database
+
+box "Calendar"
+participant CalendarView.ui
+participant CalendarView
+end box
+
+box "Server"
+participant RemoveAgendaController
+participant AgendasService
+participant AgendaService
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> CalendarView.ui : click edit calendar
+CalendarView.ui -> CalendarView : onClick()
+create WindowDeleteCalendars
+CalendarView -> WindowDeleteCalendars : createWindow()
+CalendarView -> WindowDeleteCalendars : open()
+WindowDeleteCalendars -> AgendaService : getAgenda()
+AgendaService -> RemoveAgendaController : removeAgenda()
+RemoveAgendaController -> AgendasService : removeAgenda()
+AgendasService -> Database : findAll()
+AgendaService ->> WindowDeleteCalendars : lists calendars
+User -> WindowDeleteCalendars : Selects a calendar
+WindowDeleteCalendars -> AgendaService : removeAgenda(agendaDTO)
+AgendaService -> RemoveAgendaController : removeAgenda(agendaDTO)
+RemoveAgendaController -> AgendasService : removeAgenda(agendaDTO)
+AgendasService -> Database : delete(DTO)
+AgendaService ->> WindowDeleteCalendars : onSuccess(DTO)
+
+@enduml

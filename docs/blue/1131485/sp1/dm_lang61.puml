@@ -1,0 +1,107 @@
+@startuml  dm_lang61.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+hide empty methods
+
+Workbook-->Macro : has
+Macro-->MacroLanguage : has
+Macro<--MacroExcelCompiler : compiles
+MacroCompilerManager-->MacroExcelCompiler : has
+
+class Workbook << (E,yellow) >> {
+	int createdSpreadsheets
+	boolean isActive
+	List<WorkbookListener> listeners
+	List<Spreadsheet> spreadsheets
+}
+
+class Macro << (E,yellow) >>{
+	String name
+	Language Language
+	String commandList
+}
+
+class Language {
+
+	String name
+	String starter
+
+	void initFunctions()
+	void initBinaryOperators()
+	void initUnaryOperators()
+
+}
+
+class MacroLanguage extends Language {
+
+	String name
+	String starter
+
+	void initFunctions()
+	void initBinaryOperators()
+	void initUnaryOperators()
+
+}
+
+class MacroExcelLanguage extends MacroLanguage{
+
+	String name
+	String starter
+
+	void initFunctions()
+	void initBinaryOperators()
+	void initUnaryOperators()
+
+}
+
+class VisualBasicLanguage extends MacroLanguage{
+
+	String name
+	String starter
+
+	void initFunctions()
+	void initBinaryOperators()
+	void initUnaryOperators()
+
+}
+
+class JavascriptLanguage extends MacroLanguage{
+
+	String name
+	String starter
+
+	void initFunctions()
+	void initBinaryOperators()
+	void initUnaryOperators()
+
+}
+
+class MacroCompilerManager {
+
+	instance
+	compilers
+
+	MacroCompilerManager()
+	initCompilers()
+	getInstance()
+	getCompiler(String language)
+	getCompiler(MacroLanguage lang)
+}
+
+interface ExpressionCompiler {
+
+
+}
+
+class MacroExcelCompiler implements ExpressionCompiler {
+
+
+}
+
+
+
+@enduml

@@ -1,0 +1,17 @@
+/**
+ * @startuml
+ * User -> EventCalendarView : createcalendar()
+ * EventCalendarView -> windowCreateCalendars : open()
+ * EventCalendarView -> User : windowCreateCalendars
+ * User -> windowCreateCalendars : insert information
+ * User -> windowCreateCalendars : createcal
+ * windowCreateCalendars -> EventCalendarsService : createEventCalendar(DTO)
+ * EventCalendarsService -> CreateEventCalendarController : createEventCalendar(DTO)
+ * CreateEventCalendarController -> EventCalendarService : createEventCalendar(DTO)
+ * EventCalendarService -> EventCalendar : ec= new(DTO)
+ * EventCalendarService ->	EventCalendarRepository : save(ec)
+ * EventCalendarRepository -> Database : write
+ * EventCalendarRepository -> EventCalendar : ecDTO.toDTO()
+ *
+ * @enduml
+ */

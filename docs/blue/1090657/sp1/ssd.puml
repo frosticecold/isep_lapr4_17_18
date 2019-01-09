@@ -1,0 +1,55 @@
+@startuml  ssd.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing true
+
+actor User
+boundary WorkbookView
+control WorkbookPresenter
+control FormService
+control ListWorkbookFormController
+control LanguageManager
+entity MacroRepository
+database Database 
+
+box "NSheets Client"
+participant WorkbookView
+participant WorkbookPresenter 
+participant LanguageManager
+participant WorkbookDTO
+participant MacroCompilerManager
+participant ExpressionCompiler
+participant Expression
+participant activeCell
+end box
+
+box "Server"
+participant MacroService
+participant MacroRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> WorkbookView :open Macro Window
+WorkbookView -> LanguageManager : getAllMacroLanguages()
+WorkbookView -> WorkbookDTO : getMacroDTO()
+WorkbookView -> WorkbookView : show Macro Languages
+WorkbookView -> WorkbookView : showMacro
+WorkbookView ->> User : wait for input
+User -> WorkbookView : select Language
+User -> WorkbookView : input macro commands
+User -> WorkbookView : executeMacro()
+WorkbookView -> MacroCompilerManager : compiler = getInstance().getCompiler(macro.language);
+WorkbookView -> ExpressionCompiler : expression = compiler.compile(activeCell,macro.commands())
+WorkbookView -> Expression : val = evalute()
+WorkbookView -> activeCell : setContent(val.toString())
+WorkbookView -> WorkbookView : show Success
+User -> WorkbookView : saveMacro(macro)
+WorkbookView -> MacroService : saveMacro(macro)
+MacroService -> MacroRepository : save(macro)
+MacroRepository -> Database : save(macro)
+@enduml

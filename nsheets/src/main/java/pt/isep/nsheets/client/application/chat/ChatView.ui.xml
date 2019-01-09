@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui">
+
+
+    <m:MaterialPanel>
+        <g:HTMLPanel ui:field="htmlPanel">
+
+        </g:HTMLPanel>
+        <m:MaterialTextBox ui:field = "messageText" label="Insert Message" iconType="GROUP" tooltipPosition="LEFT"/>
+        <m:MaterialButton ui:field="btnChat" text="Send Message" waves="LIGHT" textColor="WHITE" iconType="SEND" iconPosition="RIGHT" width="220px"/>
+        <m:MaterialButton ui:field="btnImage" text="Send Image" waves="LIGHT" backgroundColor="ORANGE" textColor="WHITE" iconType="SEND" iconPosition="RIGHT" width="220px"/>
+        <m:MaterialPanel ui:field="imageChooser"/>       
+        <m:MaterialRow ui:field="htmlPanel2">
+        </m:MaterialRow>
+        <m:MaterialTextArea ui:field="chatArea" readOnly="true"/>
+    </m:MaterialPanel> 
+
+</ui:UiBinder>

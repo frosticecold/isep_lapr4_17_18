@@ -1,0 +1,8 @@
+@startuml
+User -> Browser : navigate to page (workbook) and chose the import to xml option
+User -> Browser : select the wanted options
+User -> Browser : select the wanted file
+Browser -> Controller : begin the upload
+Controller -> Browser : return
+
+@enduml

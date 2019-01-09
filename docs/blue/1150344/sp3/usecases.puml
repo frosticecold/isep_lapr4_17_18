@@ -1,0 +1,12 @@
+@startuml  usecases.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+NormalUser -> (US1: Change personal information)
+SuperUser -> (US2: Enable/Disable accounts)
+
+
+@enduml

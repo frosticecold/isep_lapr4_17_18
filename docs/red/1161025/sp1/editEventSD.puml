@@ -1,0 +1,48 @@
+@startuml  editEventSD.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary EventCalendarView
+control EventCalendarPresenter
+control EventServices
+control EditEventController
+control EventService
+entity EventRepository
+entity Event
+database Database
+
+box "NSheets Client"
+participant EventCalendarView
+participant EventCalendarPresenter
+end box
+
+box "Server"
+participant EventServices
+participant EditEventController
+participant EventService
+participant Event
+participant EventRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> EventCalendarView : insert event info
+User -> EventCalendarView : click edit event
+EventCalendarView ->> EventServices : editEvent(DTO, info)
+EventServices -> EditEventController : editEvent(DTO, info)
+EditEventController -> EventService : editEvent(DTO, info)
+EventService -> EventRepository : ev = findByTitleAndDescription(DTO.title, DTO.description)
+EventService -> Event : editEvent(info)
+EventService -> EventRepository : save(ev)
+EventRepository -> Database : write
+EventService -> Event :cDTO = toDTO()
+EventServices ->> EventCalendarView : onSuccess(cDTO)
+EventCalendarView -> EventCalendarView : setContents()
+
+@enduml

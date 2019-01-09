@@ -1,0 +1,15 @@
+@startuml  us.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+User -> (Add spreadsheet)
+User -> (Delete spreadsheet)
+User -> (Reference multiple spreadsheets)
+User -> (Delete Workbooks)
+User -> (Update workbooks metadata)
+
+
+@enduml

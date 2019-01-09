@@ -1,0 +1,57 @@
+@startuml  ssd_share.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing true
+ 
+actor User
+boundary HomeView
+control HomePresenter
+control WorkbookService
+database Database 
+ 
+box "NSheets Client"
+participant HomeView
+participant HomePresenter 
+participant WorkbookDesignationDTO
+participant WorkbookDTO
+participant AccessList
+participant Access
+participant WorkbookServiceAsync
+end box
+
+box "Server"
+participant WorkbookService
+participant WorkbookDesignationRepository
+participant WorkbookDesignation
+participant WorkbookServiceImpl
+participant SaveWorkbookController
+participant PersistanceContext
+participant UserRepository
+participant ipc06controller
+participant Username
+end box
+ 
+box "Database"
+participant Database
+end box
+ 
+User -> HomePresenter : refreshView
+HomePresenter -> WorkbookServiceAsync : getUsersWorkbook(currentUser.username(),callback)
+WorkbookServiceAsync -> WorkbookServiceImpl : getUsersWorkbooks(username)
+WorkbookServiceImpl -> ipc06controller : getWorkbooksFromUser(username)
+ipc06controller -> Username : create(username)
+ipc06controller -> PersistanceContext : userrepo= repositories().users()
+ipc06controller -> UserRepository : user = repo.findUserByUsername(u)
+UserRepository -> Database : findUserbyUsername(u)
+ipc06controller -> Database : publiclist = listPublicWorkbookDescriptions()
+ipc06controller -> User : privateOwner = user.workbooksFromUser()
+ipc06controller -> Database : privateShared = listPrivateWorkbookDescriptions(user.getEmail())
+
+ipc06controller -> ipc06controller : allwb = addAll(publiclist,privateOwner,privateShared)
+ipc06controller --> WorkbookServiceImpl : allwb
+WorkbookServiceImpl --> WorkbookServiceImpl : listadto = all.toDTO()
+WorkbookServiceImpl --> WorkbookServiceAsync : listadto
+HomePresenter --> HomeView : setContents(listadto)
+@enduml

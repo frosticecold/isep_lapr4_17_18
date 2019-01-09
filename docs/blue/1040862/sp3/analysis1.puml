@@ -1,0 +1,15 @@
+@startuml  analysis.png
+skinparam handwritten false
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+
+User -> Browser : Insert REGEx \ninput in search field 
+Browser ->> Server : globalSearch(input)
+Server -->> Browser : return result
+Browser -> Browser : display
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml  design.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+
+actor User
+boundary WorkbookView
+control WorkbookView
+control GWT
+control AsyncCallback
+
+box "NSheets Client"
+participant WorkbookView
+end box
+
+box "Server"
+participant SearchServiceImpl
+end box
+
+box "NSheets shared"
+participant SearchServiceAsync
+participant SearchController
+participant SearchByRegularExpression
+
+end box
+
+box "OTHER"
+participant GWT
+participant AsyncCallback
+end box
+
+User -> WorkbookView : click Search And Replace button
+WorkbookView --> User : ask for regex and word to replace.
+User -> WorkbookView : inserts information + filter paramaters.
+WorkbookView -> GWT : create(SearchService.class)
+WorkbookView -> AsyncCallback : create()
+loop for SpreadSheet currentSpreadSheet : currentWorkbook
+loop for Cell currentCell : currentSpreadSheet
+WorkbookView -> SearchServiceImpl : matchByPattern(regex, cell.content())
+SearchServiceImpl -> SearchController : create(regex, content)
+SearchServiceImpl -> SearchController : matchByPattern()
+SearchController -> SearchByRegularExpression : search(regex, content)
+SearchController -> WorkbookView : shouldReplace?
+WorkbookView --> User : asks to replace
+User -> WorkbookView : answers.
+end
+end
+WorkbookView -> User : show output in text area
+
+@enduml

@@ -1,0 +1,101 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:m="urn:import:gwt.material.design.client.ui"
+             xmlns:ma="urn:import:gwt.material.design.addins.client" xmlns:m.html="urn:import:gwt.material.design.client.ui.html">
+
+    <ui:import
+            field="pt.isep.nsheets.client.place.NameTokens.note"/>
+    <ui:with field="res"
+             type="pt.isep.nsheets.client.resources.AppResources"/>
+
+    <ui:style>
+        .content {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        background: #e0e0e0
+
+        ;
+        border-collapse: collapse
+
+        ;
+        }
+
+        .table-style td {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            height: 36px;
+            border: 2px solid #1976d2;
+        }
+
+        .table-style tr {
+            color: #3f3f3f;
+            background: #e0e0e0;
+            border: 2px solid #1976d2;
+        }
+    </ui:style>
+
+    <m:MaterialPanel>
+        <!-- @author Joao Rocha <1161838> -->
+        <m:MaterialHeader>
+
+            <m:MaterialRow marginTop="10">
+                <m:MaterialColumn grid="s6 m5 l2">
+                    <m:MaterialDatePicker ui:field="initialdp" placeholder="Initial date" autoClose="true"/>
+                </m:MaterialColumn>
+                <m:MaterialColumn grid="s6 m5 l2">
+                    <m:MaterialDatePicker ui:field="finaldp" placeholder="Final date" autoClose="true"/>
+                </m:MaterialColumn>
+                <m:MaterialColumn grid="s6 m5 12">
+                    <m:MaterialListBox ui:field="listBoxType" placeholder="Type Filter" width="25%">
+                        <m.html:Option text="TEXT"/>
+                        <m.html:Option text="LIST"/>
+                        <m.html:Option text="BOTH"/>
+                    </m:MaterialListBox>
+                </m:MaterialColumn>
+            </m:MaterialRow>
+
+            <m:MaterialRow marginTop="60">
+                <m:MaterialTextBox m:id="fBox" ui:field="filterTextBox" placeholder="Filter"
+                                   label="Enter a filter for advanced searching"
+                                   active="true" grid="s11"/>
+                <m:MaterialIcon ui:field="searchButton" iconType="SEARCH" iconColor="BLUE" waves="DEFAULT" circle="true"
+                                grid="s1"/>
+            </m:MaterialRow>
+
+
+        </m:MaterialHeader>
+
+        <g:HTMLPanel ui:field="htmlPanel"/>
+
+        <m:MaterialFAB>
+            <m:MaterialButton ui:field="export4spreadsheet" type="FLOATING" iconType="IMPORT_EXPORT" size="LARGE"/>
+        </m:MaterialFAB>
+        <ma:window.MaterialWindow ui:field="exportPopUp" title="Export Result List" height="400px" width="400px">
+            <m:MaterialRow marginTop="20">
+                <m:MaterialListBox ui:field="spreadsheetList" placeholder="Spreadsheets" width="50%">
+
+                </m:MaterialListBox>
+            </m:MaterialRow>
+            <m:MaterialRow marginTop="20">
+                <m:MaterialColumn>
+                    <m:MaterialListBox ui:field="rangeBegginningX" placeholder="Beginning Row" width="50%">
+
+                    </m:MaterialListBox>
+                </m:MaterialColumn>
+                <m:MaterialColumn>
+                    <m:MaterialListBox ui:field="rangeBegginningY" placeholder="Beginning Column" width="50%">
+
+                    </m:MaterialListBox>
+                </m:MaterialColumn>
+            </m:MaterialRow>
+            <m:MaterialRow>
+                <m:MaterialButton ui:field="exportButton" iconType="FILE_UPLOAD" backgroundColor="BLUE">
+
+                </m:MaterialButton>
+            </m:MaterialRow>
+        </ma:window.MaterialWindow>
+    </m:MaterialPanel>
+</ui:UiBinder>

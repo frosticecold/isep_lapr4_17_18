@@ -1,0 +1,45 @@
+@startuml  design1.png
+skinparam handwritten true
+skinparam monochrome true
+skinparam packageStyle rect
+skinparam defaultFontName FG Virgil
+skinparam shadowing false
+
+actor User
+boundary newNotePageView
+control newNotePagePresenter
+control NoteService
+control NoteServiceImpl
+control NoteController
+entity NoteRepository
+entity UserRepository
+database Database 
+
+box "NSheets Client"
+participant newNotePageView
+participant newNotePagePresenter 
+end box
+
+box "Server"
+participant NoteServiceImpl
+participant NoteController
+participant NoteService
+participant UserRepository
+participant NoteRepository
+end box
+
+box "Database"
+participant Database
+end box
+
+User -> newNotePagePresenter : onClick() / On button click
+newNotePagePresenter ->> NoteServiceImpl: createNote(NoteDTO dto)
+NoteServiceImpl -> NoteController : createNote(NoteDTO dto)
+NoteController -> UserRepository: User user = getUserByUsername(CurrentUser.username())
+NoteController -> NoteService : createNote(NoteDTO dto, User user)
+NoteService -> NoteRepository : save(Note)
+NoteRepository -> Database : save
+NoteController ->> newNotePagePresenter : onSuccess() 
+newNotePagePresenter -> newNotePageView : refreshNotes() / Informs success
+
+@enduml
